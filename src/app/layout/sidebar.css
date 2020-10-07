@@ -1,0 +1,67 @@
+.sidebar .user-info{
+    border-bottom: 1px solid #444;
+    padding: 1em;
+    text-align: center;
+  }
+  
+  .sidebar .nav{
+    margin-top: .5em;
+  }
+  
+  .sidebar .company-logo{
+    height: 40vh;
+  }
+  
+  .sidebar .nav-item .nav-link:hover{
+    background-color: #444;
+  }
+  
+  .sidebar .nav-link.active{
+    background-color: #fff !important;
+    color: #000 !important;
+    cursor: pointer !important;
+  }
+  
+  .sidebar .nav-item .nav-link.active:hover{
+    background-color: #FFF;
+  }
+  
+  .sidebar .nav-link{
+    /* cursor: pointer; */
+    color: #FFF;
+    margin: 0 .5em;
+    cursor: pointer !important;
+  }
+  
+  .sidebar .nav-link svg{
+    /* cursor: pointer; */
+    margin-right: .5em;
+    width: 30px;
+    cursor: pointer !important;
+  }
+  
+  .figure-img{
+    margin-bottom: 0px;
+  }
+  
+  h6{
+    color: #dddddd;
+  }
+  
+  .btn-logout{
+    width: 100% !important;
+    text-align: center;
+    font-size: 13px;
+    cursor: pointer !important;
+  }
+  
+  .btn-logout:hover{
+    cursor: pointer !important;
+  }
+  
+  .color-icon{
+    color: #ff1065;
+  }
+  
+  
+  
