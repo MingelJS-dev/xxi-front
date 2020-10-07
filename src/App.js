@@ -14,6 +14,7 @@ import useWindowSize from "./app/shared/WindowSize.js";
 import LoginPage from "./app/login/LoginPage.js";
 import Sidebar from "./app/layout/Sidebar.js";
 
+import NewUserPage from "./app/users/NewUserPage.js";
 
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
@@ -92,6 +93,7 @@ function App() {
                     <Route path="/" exact>
                       {/* <Redirect to="/dashboard" /> */}
                     </Route>
+                    <Route path="/users/new" exact component={NewUserPage} />
                     {/* <Route path="/dashboard" exact component={DashboardPage} />
                     <Route path="/users" exact component={UsersListPage} />
                     <Route path="/users/new" exact component={NewUserPage} />
@@ -169,6 +171,7 @@ function App() {
             <Redirect to="/login" />
           </Route>
           <Route exact path="/login" component={LoginPage} />
+          <Route path="/users/new" exact component={NewUserPage} />
           <Route path="*">
             <Redirect to="/login" />
           </Route>

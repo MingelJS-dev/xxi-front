@@ -152,7 +152,7 @@ export function updateUserById(data){
 export function createUser(data){
   return async function(dispatch, getState){
     dispatch(create(data))
-
+    console.log('asdasdasdsa', window)
     try{
       const res = await axios.post(window.config.API_URL + 'users',
         data,

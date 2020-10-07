@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { startLogin, fetchCompanyBySlug } from '../../actions/auth.actions.js';
 import { getCompany } from '../../reducers/auth.reducer.js';
+import { Link } from 'react-router-dom'
 
 // import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -96,7 +97,7 @@ function LoginPage() {
               }
             </Form>
             <Card.Footer>
-                <p className="message d-flex justify-content-center mt-3 mb-0">Crear usuario</p>
+                <p className="message d-flex justify-content-center mt-3 mb-0"> <Link to={`/users/new`}>Crear usuario</Link></p>
                 </Card.Footer>
           </Card.Body>
         </Card>
