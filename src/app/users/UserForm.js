@@ -119,7 +119,7 @@ export default function UserForm({ user, save }) {
         email,
         password,
         // repeatPassword,
-        rol_id: 0,
+        rol_id: 1,
         // rut,
         // user_role_id: 2,
       }

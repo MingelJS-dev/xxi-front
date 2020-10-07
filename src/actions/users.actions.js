@@ -154,7 +154,7 @@ export function createUser(data){
     dispatch(create(data))
     console.log('asdasdasdsa', window)
     try{
-      const res = await axios.post(window.config.API_URL + 'users',
+      const res = await axios.post(window.config.API_URL + 'user_create',
         data,
         {
           headers: getAuthHeaders(getState())
