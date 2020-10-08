@@ -47,15 +47,16 @@ function render(){
     return;
   }
 
-  let sessionData = JSON.parse(sessionStorage.getItem('sessionData')) || {}
+  let sessionData = JSON.parse(sessionStorage.getItem('sessionData')) || false
   IS_RENDERED = true;
 
+  console.log(sessionData)
   const store = createStore(
     reducers,
     {
       auth: {
-        isLoggedIn: !!sessionData.token,
-        token: sessionData.token
+        isLoggedIn: !!sessionData,
+        token: sessionData
       }
     },
     composeEnhancers(

@@ -13,6 +13,7 @@ import useWindowSize from "./app/shared/WindowSize.js";
 
 import LoginPage from "./app/login/LoginPage.js";
 import Sidebar from "./app/layout/Sidebar.js";
+import DashboardPage from "./app/dashboard/DashboardPage.js";
 
 import NewUserPage from "./app/users/NewUserPage.js";
 
@@ -68,6 +69,7 @@ function App() {
     onSwipedRight: () => setOpen(true),
   });
 
+  console.log('sdasdasdasdas', isLoggedIn)
   useEffect(() => {
     if (isLoggedIn) {
       // dispatch(fetchCurrentUser());
@@ -91,67 +93,10 @@ function App() {
                 <Col {...handlers} className="col-md-9 ml-sm-auto col-lg-10 px-md-2" style={{ height: '100vh' }}>
                   <Switch>
                     <Route path="/" exact>
-                      {/* <Redirect to="/dashboard" /> */}
+                      <Redirect to="/dashboard" />
                     </Route>
                     <Route path="/users/new" exact component={NewUserPage} />
-                    {/* <Route path="/dashboard" exact component={DashboardPage} />
-                    <Route path="/users" exact component={UsersListPage} />
-                    <Route path="/users/new" exact component={NewUserPage} />
-                    <Route path="/users/:UserId" exact component={UserDetailPage} />
-                    <Route path="/users/:UserId/edit" exact component={EditUserPage} />
-                    <Route path="/zones" exact component={ZonesListPage} />
-                    <Route path="/zones/new" exact component={NewZonePage} />
-                    <Route path="/zones/:ZoneId" exact component={EditZonePage} />
-                    <Route path="/logs" exact component={LogsListPage} />
-                    <Route path="/logs/:EntryId" exact component={LogDetailPage} />
-                    <Route path="/doors" exact component={DoorsListPage} />
-                    <Route path="/doors/new" exact component={NewDoorPage} />
-                    <Route path="/doors/map" exact component={DoorsMapPage} />
-                    <Route path="/doors/:DoorId" exact component={DoorDetailPage} />
-                    <Route path="/doors/:DoorId/edit" exact component={EditDoorPage} />
-                    <Route path="/doors/:DoorId/notifications" exact component={DoorNotificationsPage} /> */}
-                    {/* <Route
-                      path="/subcompanies"
-                      exact
-                      component={SubcompaniesListPage}
-                    />
-                    <Route
-                      path="/subcompanies/new"
-                      exact
-                      component={NewSubcompanyPage}
-                    />
-                    <Route
-                      path="/subcompanies/:SubcompanyId"
-                      exact
-                      component={EditSubcompanyPage}
-                    />
-                    <Route path="/access" exact component={AccessListPage} />
-                    <Route path="/access/new" exact component={NewAccessPage} />
-                    <Route
-                      path="/access/:AccessId"
-                      exact
-                      component={AccessDetailPage}
-                    />
-                    <Route
-                      path="/access/:AccessId/edit"
-                      exact
-                      component={EditAccessPage}
-                    />
-                    <Route path="/revisions" exact component={RevisionsListPage} />
-                    <Route path="/sensors" exact component={SensorsListPage} />
-                    <Route path="/sensors/new" exact component={NewSensorPage} />
-                    <Route path="/sensors/:SensorId" exact component={SensorDetailPage} />
-                    <Route path="/sensors/:SensorId/edit" exact component={EditSensorPage} />
-                    <Route path="/sensors/:SensorId/charts/new" exact component={NewChartPage} />
-                    <Route path="/sensors/:SensorId/charts/:ChartId/edit" exact component={EditChartPage} />
-                    <Route path="/companies" exact component={CompaniesListPage} />
-                    <Route path="/companies/new" exact component={NewCompanyPage} />
-                    <Route path="/companies/:CompanyId" exact component={EditCompanyPage} />
-
-                    <Route path="/alerts" exact component={AlertsListPage} />
-
-                    <Route path="/profile" exact component={ProfilePage} /> */}
-
+                    <Route path="/dashboard" exact component={DashboardPage} />
                     <Route path="*">
                       <Redirect to="/" />
                     </Route>

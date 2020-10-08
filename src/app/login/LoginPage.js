@@ -18,23 +18,23 @@ import Figure from 'react-bootstrap/Figure';
 import Spinner from '../shared/Spinner.js'
 
 function Header(){
-  const company = useSelector(getCompany)
 
-  if(!company){
-    return <Spinner />
-  }
 
-  window.title = company.app_name
+  // if(!){
+  //   return <Spinner />
+  // }
+
+  window.title = 'Restaurant XXI'
 
   return (
     <Figure>
       {
-        company.logo_url ?
-          <Figure.Image width={171} height={180} alt="171x180" src={company.logo_url} />
+        false ?
+          <Figure.Image width={171} height={180} alt="171x180" src={'url_icon'} />
         : null
       }
       <Figure.Caption>
-        <h4 className="pt-2">{company.app_name}</h4>
+        <h4 className="pt-2">Restauran XXI</h4>
       </Figure.Caption>
     </Figure>
   )
@@ -48,8 +48,7 @@ function LoginPage() {
   const [ password, setPassword ] = useState('')
 
   useEffect(() => {
-    const slug = window.location.host.split(".")[0]
-    dispatch(fetchCompanyBySlug(slug || ''))
+
   }, [dispatch])
 
   function login(e){

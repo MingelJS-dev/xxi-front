@@ -24,8 +24,8 @@ export function startLogin(email, password){
       });
 
       if(res.status === 200){
-        dispatch(loginSuccess(res.data.result))
-        sessionStorage.setItem('sessionData', JSON.stringify(res.data.result));
+        dispatch(loginSuccess(res.data.access_token))
+        sessionStorage.setItem('sessionData', JSON.stringify(res.data.access_token));
       }else{
         dispatch(loginFailed(res.statusText))
       }
@@ -42,21 +42,4 @@ export function startLogout(){
   }
 }
 
-export function fetchCompanyBySlug(slug){
-  return async function(dispatch, getState){
-    dispatch(loadCompany())
-
-    try{
-      const res = await axios.get(`${window.config.API_URL}login/companies/${slug}`);
-
-      if(res.status === 200){
-        dispatch(loadCompanySuccess(res.data.result))
-      }else{
-        dispatch(loadCompanyFailed(res))
-      }
-    }catch(error){
-      dispatch(loadCompanyFailed(error))
-    }
-  }
-}
 

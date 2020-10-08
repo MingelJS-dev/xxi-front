@@ -26,7 +26,7 @@ export default function auth(state = INITIAL_STATE, action){
       return {
         ...state,
         isLoggedIn: true,
-        token: action.data.token
+        token: action.data.access_token
       }
 
     case AuthActions.LOGIN_FAILED:
@@ -85,47 +85,47 @@ export const getDecodedToken = state => {
   return decoded;
 }
 
-export const getSettings = state => {
-  const settings = state.auth.token ? decodeJWT(state.auth.token).settings : {}
+// export const getSettings = state => {
+//   const settings = state.auth.token ? decodeJWT(state.auth.token).settings : {}
 
-  settings.menu = (settings && settings.menu) ? settings.menu : {
-    departments: {
-      one: null,
-      many: null
-    },
-    doors: {
-      one: null,
-      many: null
-    },
-    subcompanies: {
-      one: null,
-      many: null
-    }
-  }
+//   settings.menu = (settings && settings.menu) ? settings.menu : {
+//     departments: {
+//       one: null,
+//       many: null
+//     },
+//     doors: {
+//       one: null,
+//       many: null
+//     },
+//     subcompanies: {
+//       one: null,
+//       many: null
+//     }
+//   }
 
-  if (settings && settings.menu ) {
-    defaultMenu.map(x => {
-      settings.menu[x.type]['one'] = settings.menu[x.type]['one'] ? settings.menu[x.type]['one'] : x.one;
-      settings.menu[x.type]['many'] = settings.menu[x.type]['many'] ? settings.menu[x.type]['many'] : x.many;
-    })
-  }
+//   if (settings && settings.menu ) {
+//     defaultMenu.map(x => {
+//       settings.menu[x.type]['one'] = settings.menu[x.type]['one'] ? settings.menu[x.type]['one'] : x.one;
+//       settings.menu[x.type]['many'] = settings.menu[x.type]['many'] ? settings.menu[x.type]['many'] : x.many;
+//     })
+//   }
 
-  return settings;
-};
+//   return settings;
+// };
 
-export const getLogo = state => createSelector(
-  getSettings,
-  settings => {
-    return settings ? (settings.logo_alt_url || settings.logo_url) : ''
-  }
-)(state)
+// export const getLogo = state => createSelector(
+//   getSettings,
+//   settings => {
+//     return settings ? (settings.logo_alt_url || settings.logo_url) : ''
+//   }
+// )(state)
 
-export const getAppName = state => createSelector(
-  getSettings,
-  settings => {
-    return settings && settings.app_name ? settings.app_name :  'Restaurant XXI'
-  }
-)(state)
+// export const getAppName = state => createSelector(
+//   getSettings,
+//   settings => {
+//     return settings && settings.app_name ? settings.app_name :  'Restaurant XXI'
+//   }
+// )(state)
 
 export const getCompany = state => state.auth.company
 

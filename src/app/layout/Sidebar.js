@@ -32,22 +32,22 @@ import * as AuthReducer from '../../reducers/auth.reducer.js'
 // import useFeatureChecker from '../shared/FeatureChecker.js'
 
 function Header() {
-  const logoURL = useSelector(AuthReducer.getLogo)
-  const appName = useSelector(AuthReducer.getAppName)
-  const settings = useSelector(AuthReducer.getSettings)
-  const companyName = useSelector(AuthReducer.getCompanyName)
+  // const logoURL = useSelector(AuthReducer.getLogo)
+  // const appName = useSelector(AuthReducer.getAppName)
+  // const settings = useSelector(AuthReducer.getSettings)
+  // const companyName = useSelector(AuthReducer.getCompanyName)
 
-  document.title = appName
+  // document.title = appName
 
   let logo
 
-  if (logoURL) {
-    logo = <Figure.Image width={150} height={160} alt="150x160" src={logoURL} />
-  } else {
+  // if (logoURL) {
+  //   logo = <Figure.Image width={150} height={160} alt="150x160" src={logoURL} />
+  // } else {
     logo = (
-      <h5 className="text-white font-weight-bold">{companyName}</h5>
+      <h5 className="text-white font-weight-bold">icon</h5>
     )
-  }
+  // }
 
   return (
     <div className="company-logo">
@@ -55,7 +55,7 @@ function Header() {
         <Figure>
           {logo}
           <Figure.Caption>
-            <h6 className="py-1">{appName}</h6>
+            <h6 className="py-1">Restaurant XXI</h6>
           </Figure.Caption>
         </Figure>
       </Link>

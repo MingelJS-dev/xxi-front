@@ -16,8 +16,7 @@ export default function NewUserPage(){
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(SubcompaniesActions.fetchAll())
-    dispatch(UserActions.fetchRoles())
+    // dispatch(UserActions.fetchRoles())
   }, [])
 
   function crateUser(data){
