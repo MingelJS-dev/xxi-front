@@ -35,7 +35,7 @@
 }
 
 table>thead>tr>th {
-  background-color: #343a40;
+  background-color: #0090DB;
   color: white;
   font-size: 15px;
   font-weight: bold;
@@ -148,7 +148,7 @@ table>tbody>tr>td {
 }
 
 .card-header-title-by-vault {
-  background-color: #343a40;
+  background-color: #0090DB;
   color: white;
   font-size: 12px;
   font-weight: 900;
@@ -157,7 +157,7 @@ table>tbody>tr>td {
 }
 
 .card-hearder{
-  background-color: #343a40;
+  background-color: #0090DB !important;
   color: white;
   font-size: 16px;
   font-weight: 900;
@@ -356,8 +356,7 @@ table>tbody>tr>td {
 }
 
 .sidebar{
-  background-color: #333;
-
+  background-color: #003C5C;
   position: fixed;
   top: 0;
   bottom: 0;

@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
+import SuppliesTable from '../supplies/SuppliesTable.js'
 import Spinner from '../shared/Spinner.js';
 import Header from '../shared/Header.js'
 
@@ -36,24 +37,39 @@ export default function DashboardPage() {
       <Row>
         <Col sm={12} lg={5}>
 
-            <Row className="mb-2">
-              <Col sm={12} className="p-0">
+          <Row className="mb-2">
+            <Col sm={12} className="p-0">
+              <Card className="shadow">
+                <Card.Header className='card-title  card-hearder'>
+                  <span>Suministros</span>
+                </Card.Header>
+                <Card.Body className="p-0">
+                  <SuppliesTable />
+                </Card.Body>
+              </Card>
 
-              </Col>
-            </Row>
-
+            </Col>
+          </Row>
 
           <Row className="mb-2">
             <Col sm={12} className="p-0">
- 
+              <Card className="shadow">
+                <Card.Header className='card-title card-hearder'>
+                  <span>Ranking</span>
+                </Card.Header>
+                <Card.Body className="p-0">
+                  <SuppliesTable />
+                </Card.Body>
+              </Card>
+
             </Col>
           </Row>
         </Col>
 
         <Col sm={12} lg={7} className="p-0 pl-lg-2">
           <Card className="shadow">
-            <Card.Header className='card-title bg-dark'>
-            <span>Reporte Card</span>
+            <Card.Header className='card-title card-hearder'>
+              <span>Reporte Card</span>
 
             </Card.Header>
 

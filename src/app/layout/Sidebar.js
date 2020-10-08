@@ -11,18 +11,11 @@ import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTachometerAlt,
-  faExclamationTriangle,
   faUsers,
-  faUnlockAlt,
-  faClipboardList,
-  faMicrochip,
   faPowerOff,
-  faVectorSquare,
-  faHardHat,
   faKey,
-  faDoorClosed,
-  faIndustry,
-  faInfoCircle
+  faCircle,
+  faList
 } from '@fortawesome/free-solid-svg-icons';
 
 import './sidebar.css'
@@ -106,7 +99,7 @@ export default function Sidebar({ onChange }) {
 
         <div className="user-info">
           <Dropdown>
-            <Dropdown.Toggle block variant="dark" id="dropdown-basic">
+            <Dropdown.Toggle block className="btn-logout" id="dropdown-basic">
               {/* {currentUser ? currentUser.name : ''} */} {'Test'}
             </Dropdown.Toggle>
 
@@ -127,6 +120,26 @@ export default function Sidebar({ onChange }) {
                 <span>Dashboard</span>
               </NavLink>
             </li>
+
+              <li className="nav-item">
+                <NavLink  to="/products" className="nav-link" onClick={() => onChange()}>
+                  <FontAwesomeIcon icon={faCircle} />
+                  <span>Productos</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink  to="/supplies" className="nav-link" onClick={() => onChange()}>
+                  <FontAwesomeIcon icon={faList} />
+                  <span>Suministros</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink  to="/users" className="nav-link" onClick={() => onChange()}>
+                  <FontAwesomeIcon icon={faUsers} />
+                  <span>Usuarios</span>
+                </NavLink>
+              </li>
+
 
             {/* <CheckFeatures some={["LIST_ALL_ACCESS", "LIST_PERSONAL_ACCESS"]}>
               <li className="nav-item">
@@ -220,12 +233,6 @@ export default function Sidebar({ onChange }) {
 
             <li className="separator py-2"></li>
 
-            <li className="nav-item">
-              <a href="https://seguridad-bovedas.gitbook.io/seguridad-bovedas/" target="_blank" className="nav-link">
-                <FontAwesomeIcon icon={faInfoCircle} />
-                <span>Ayuda</span>
-              </a>
-            </li>
 
           </ul>
         </nav>

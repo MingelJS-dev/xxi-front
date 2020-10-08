@@ -50,7 +50,6 @@ function render(){
   let sessionData = JSON.parse(sessionStorage.getItem('sessionData')) || false
   IS_RENDERED = true;
 
-  console.log(sessionData)
   const store = createStore(
     reducers,
     {

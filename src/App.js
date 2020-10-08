@@ -69,7 +69,6 @@ function App() {
     onSwipedRight: () => setOpen(true),
   });
 
-  console.log('sdasdasdasdas', isLoggedIn)
   useEffect(() => {
     if (isLoggedIn) {
       // dispatch(fetchCurrentUser());

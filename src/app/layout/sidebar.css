@@ -4,6 +4,7 @@
     text-align: center;
   }
   
+  
   .sidebar .nav{
     margin-top: .5em;
   }
@@ -13,17 +14,17 @@
   }
   
   .sidebar .nav-item .nav-link:hover{
-    background-color: #444;
+    background-color: #0090DB;
   }
   
   .sidebar .nav-link.active{
-    background-color: #fff !important;
-    color: #000 !important;
+    background-color: #0090DB !important;
+    color: white !important;
     cursor: pointer !important;
   }
   
   .sidebar .nav-item .nav-link.active:hover{
-    background-color: #FFF;
+    background-color: #0090DB;
   }
   
   .sidebar .nav-link{
@@ -53,6 +54,8 @@
     text-align: center;
     font-size: 13px;
     cursor: pointer !important;
+    background-color: white !important;
+    color: black !important;
   }
   
   .btn-logout:hover{
