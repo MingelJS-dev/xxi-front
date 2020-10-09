@@ -14,11 +14,9 @@ export function getToken(state){
 
 export function getAuthHeaders(state){
   const token = getToken(state)
-
+  console.log(token)
   if(token){
-    return {
-      Authorization: 'Bearer ' + token
-    }
+    return token
   }else{
     return {}
   }

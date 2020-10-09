@@ -16,6 +16,8 @@ import Sidebar from "./app/layout/Sidebar.js";
 import DashboardPage from "./app/dashboard/DashboardPage.js";
 
 import NewUserPage from "./app/users/NewUserPage.js";
+import UsersListPage from "./app/users/UserListPage.js";
+import EditUserPage from "./app/users/EditUserPage.js";
 
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
@@ -95,6 +97,8 @@ function App() {
                       <Redirect to="/dashboard" />
                     </Route>
                     <Route path="/users/new" exact component={NewUserPage} />
+                    <Route path="/users" exact component={UsersListPage} />
+                    <Route path="/users/:UserId/edit" exact component={EditUserPage} />
                     <Route path="/dashboard" exact component={DashboardPage} />
                     <Route path="*">
                       <Redirect to="/" />
@@ -115,7 +119,7 @@ function App() {
             <Redirect to="/login" />
           </Route>
           <Route exact path="/login" component={LoginPage} />
-          <Route path="/users/new" exact component={NewUserPage} />
+          {/* <Route path="/users/new" exact component={NewUserPage} /> */}
           <Route path="*">
             <Redirect to="/login" />
           </Route>

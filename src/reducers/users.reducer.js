@@ -88,25 +88,6 @@ export default function auth(state = INITIAL_STATE, action){
         }
       }
 
-    case UsersActions.LOAD_ROLES:
-      return {
-        ...state,
-        isLoading: true,
-      }
-
-    case UsersActions.LOAD_ROLES_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        roles: action.data
-      }
-
-    case UsersActions.LOAD_ROLES_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-      }
-
     default:
       return state;
   }

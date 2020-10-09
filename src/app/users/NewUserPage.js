@@ -8,15 +8,15 @@ import Card from 'react-bootstrap/Card';
 
 import UserForm from './UserForm.js'
 
+import * as RolesActions from '../../actions/roles.actions.js'
 import * as UserActions from '../../actions/users.actions.js'
-
 import Header from '../shared/Header.js'
 
 export default function NewUserPage(){
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(UserActions.fetchRoles())
+    dispatch(RolesActions.fetchRoles())
   }, [])
 
   function crateUser(data){

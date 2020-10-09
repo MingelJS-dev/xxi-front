@@ -67,28 +67,25 @@ export function createFailed(error){
 
 export const [ UPDATE_PAGINATION, updatePagination ] = createAction('[Users] UPDATE_PAGINATION', ['headers'])
 
-export const [ LOAD_ROLES, loadRoles ] = createAction('[Users] LOAD_ROLES')
-export const [ LOAD_ROLES_SUCCESS, loadRolesSucess ] = createAction('[Users] LOAD_ROLES_SUCCESS', ['data'])
-export const [ LOAD_ROLES_FAILED, loadRolesFailed ] = createAction('[Users] LOAD_ROLES_FAILED', ['error'])
-
 export function fetchUsers(filters = {}){
   return async function(dispatch, getState){
     dispatch(loadUsers())
 
     try{
-      let url = `${window.config.API_URL}users`
+      let url = `${window.config.API_URL}get_all_user`
 
-      if( Object.keys(filters).length ){
-        url += '?' + toQueryString(filters)
-      }
+      // if( Object.keys(filters).length ){
+        url += '?' + toQueryString({page: 1})
+      // }
 
       const res = await axios.get(url, {
-        headers: getAuthHeaders(getState())
+        headers: { token: getAuthHeaders(getState()) },
+        token: getAuthHeaders(getState())
       });
 
       if(res.status === 200){
         dispatch(updatePagination(res.headers)) 
-        dispatch(loadUsersSuccess(res.data.result))
+        dispatch(loadUsersSuccess(res.data.data))
       }else{
         dispatch(loadUsersFailed(res.statusText))
       }
@@ -126,10 +123,11 @@ export function updateUserById(data){
     dispatch(updateOne(data))
 
     try{
-      const res = await axios.put(window.config.API_URL + 'users/' + data.id,
+      const res = await axios.put(window.config.API_URL + 'update_user',
         data,
         {
-          headers: getAuthHeaders(getState())
+          headers: { token: getAuthHeaders(getState()) },
+          token: getAuthHeaders(getState())
         }
       );
 
@@ -156,7 +154,8 @@ export function createUser(data){
       const res = await axios.post(window.config.API_URL + 'user_create',
         data,
         {
-          headers: getAuthHeaders(getState())
+          headers: { token: getAuthHeaders(getState()) },
+          token: getAuthHeaders(getState())
         }
       );
 
@@ -200,27 +199,4 @@ export function updateUserStatus(UserId, status){
   }
 }
 
-export function fetchRoles(){
-  return async function(dispatch, getState){
-    dispatch(loadRoles())
-
-    try{
-      let url = `${window.config.API_URL}users/roles`
-
-      const res = await axios.get(url, {
-        headers: getAuthHeaders(getState())
-      });
-
-      if(res.status === 200){
-        dispatch(loadRolesSucess(res.data.result))
-      }else{
-        console.error(res);
-        dispatch(loadRolesFailed(res))
-      }
-    }catch(err){
-      console.error(err);
-      dispatch(loadRolesFailed(err))
-    }
-  }
-}
 

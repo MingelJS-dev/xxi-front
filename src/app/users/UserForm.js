@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
 
 import * as UsersReducer from '../../reducers/users.reducer.js'
-
+import * as RolesReducer from '../../reducers/roles.reducer.js'
 import Spinner from '../shared/Spinner.js'
 // import useFeatureChecker from '../shared/FeatureChecker.js'
 
@@ -64,12 +64,12 @@ export default function UserForm({ user, save }) {
   const [name, setName] = useState(user.name || '')
   const [email, setEmail] = useState(user.email || '')
   // const [rut, setRut] = useState(user.rut || '')
-  const [role, setRole] = useState(user.role || '')
-  const [password, setPassword] = useState('')
+  const [role, setRole] = useState(user.rol_id || '')
+  const [password, setPassword] = useState(user.password || '')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [errors, setErrors] = useState({})
 
-  const roles = useSelector(UsersReducer.getRoles)
+  const roles = useSelector(RolesReducer.getRoles)
 
   const globalLoading = useSelector(UsersReducer.getIsLoading)
   const localLoading = useSelector(state => UsersReducer.getIsLoadingById(state, user.id))
@@ -119,7 +119,7 @@ export default function UserForm({ user, save }) {
         email,
         password,
         // repeatPassword,
-        rol_id: 1,
+        rol_id: role,
         // rut,
         // user_role_id: 2,
       }
@@ -179,9 +179,9 @@ export default function UserForm({ user, save }) {
           {
             roles.map(item => (
               <option
-                key={item}
-                value={item}
-              >{item}</option>
+                key={item.id}
+                value={item.id}
+              >{item.name}</option>
             ))
           }
         </select>
