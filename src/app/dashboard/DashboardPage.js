@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 import SuppliesTable from '../supplies/SuppliesTable.js'
+import * as SuppliesActions from '../../actions/supplies.actions.js'
+
 import Spinner from '../shared/Spinner.js';
 import Header from '../shared/Header.js'
 
@@ -21,7 +23,7 @@ export default function DashboardPage() {
 
 
   useEffect(() => {
-
+    dispatch(SuppliesActions.fetchSupplies())
   }, [dispatch])
 
   // useEffect(() => {

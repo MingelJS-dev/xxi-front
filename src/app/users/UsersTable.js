@@ -138,7 +138,7 @@ export default function UsersTable({ tableSize, mode = 'Table' }) {
                     {item.email.toLowerCase()}
                   </td>
                   <td>
-                    {roles.filter(x => x.id === item.rol_id)[0].name}
+                    {roles.filter(x => x.id === item.rol_id)[0] ?  roles.filter(x => x.id === item.rol_id)[0].name : null }
                   </td>
                   <td>
                     {/* <StatusCheck item={item}></StatusCheck> */}

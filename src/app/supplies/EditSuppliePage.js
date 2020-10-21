@@ -2,9 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import { CurrentSettingContext } from '../../App.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { getSupplieById } from '../../reducers/supplies.reducer.js'
 
-import * as UserActions from '../../actions/users.actions.js'
-import * as RolesActions from '../../actions/roles.actions.js'
+import * as SupplieActions from '../../actions/supplies.actions.js'
+
 import { getUserById } from '../../reducers/users.reducer.js'
 
 import Container from 'react-bootstrap/Container';
@@ -15,27 +16,26 @@ import Card from 'react-bootstrap/Card';
 import Spinner from '../shared/Spinner.js';
 import Header from "../shared/Header.js"
 
-import UserForm from './UserForm.js';
+import SupplieForm from './SupplieForm.js'
 
-export default function EditUserPage() {
+export default function EditSuppliePage() {
     const dispatch = useDispatch()
     const params = useParams()
 
     useEffect(() => {
-        dispatch(RolesActions.fetchRoles())
-        dispatch(UserActions.fetchUsers())
-    }, [dispatch, params.UserId])
+        dispatch(SupplieActions.fetchSupplies())
+    }, [dispatch, params.SupplieId])
 
-    const currentUser = useSelector(state => getUserById(state, params.UserId))
-    if (!currentUser) {
+    const currentSupplie = useSelector(state => getSupplieById(state, params.SupplieId))
+    if (!currentSupplie) {
         return (
             <Spinner full={true} />
         )
     }
 
 
-    function updateUser(data) {
-        dispatch(UserActions.updateUserById(data))
+    function updateSupplie(data) {
+        dispatch(SupplieActions.updateSupplieById(data))
     }
 
 
@@ -43,10 +43,10 @@ export default function EditUserPage() {
         <Container fluid={true} className="my-3">
             <Row>
                 <Header
-                    title="Editar usuario"
+                    title="Editar suministro"
                     items={[
-                        { label: "Listado de usuarios", to: "/users" },
-                        { label: "Editar usuario" }
+                        { label: "Listado de suministros", to: "/supplies" },
+                        { label: "Editar suministro" }
                     ]}
                 >
                 </Header>
@@ -54,13 +54,13 @@ export default function EditUserPage() {
             <Row className="mb-2">
                 <Col className="col-12 p-0 mb-2 col-lg-6 pr-lg-2">
                     <Card className="shadow">
-                        <Card.Header className="text-white font-weight-bold bg-dark">Datos de usuario</Card.Header>
+                        <Card.Header className="text-white font-weight-bold bg-dark">Datos de suministro</Card.Header>
                         <Card.Body>
-                            {currentUser
+                            {currentSupplie
                                 ?
-                                <UserForm
-                                    user={currentUser}
-                                    save={updateUser}
+                                <SupplieForm
+                                    supplie={currentSupplie}
+                                    save={updateSupplie}
                                 />
                                 : <Spinner />
                             }

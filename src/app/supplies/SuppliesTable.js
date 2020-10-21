@@ -10,48 +10,78 @@ import { faMicrochip, faDoorClosed, faHashtag } from '@fortawesome/free-solid-sv
 
 import history from '../../history.js'
 
+import * as SupplieReducer from '../../reducers/supplies.reducer.js'
 
 export default function SuppliesTable() {
+  const supplies = useSelector(SupplieReducer.getSupplies)
+  const isLoading = useSelector(SupplieReducer.getIsLoading)
 
-    const headersData = [
-        {
-            label: 'Index',
-          },
-          {
-            label: 'Suministro',
-            field: 'name',
-          },
-          {
-            label: 'Stock',
-            field: 'stock',
-          }
-      ]
-
-    //   ${small ? 'table-sm' : ''}`
-      return (
-        <table className={`table table-striped table-bordered table-hover mb-0`} >
-          <thead>
-            <tr>
-              {
-                headersData.map(item => (
-                  <th key={item.field}>{item.label}</th>
-                ))
-              }
-            </tr>
-          </thead>
   
-          <tbody>
-            {/* {
+  if (isLoading) {
+    return (
+      <div className="container-lg py-4 p-0 text-center">
+        <Spinner />
+      </div>
+    )
+  }
+
+  if (supplies.length === 0) {
+    return <div className="not-found-table-items">No se encontraron suministros</div>
+  }
+
+  const headersData = [
+    {
+      label: 'Index',
+      field: 'idx',
+    },
+    {
+      label: 'Suministro',
+      field: 'name',
+    },
+    {
+      label: 'Descripción',
+      field: 'description',
+    },
+    // {
+    //   label: 'En espera',
+    //   field: 'on_hold'
+    // },
+    {
+      label: 'Stock',
+      field: 'quantity',
+    },
+    {
+      label: 'Cantidad minima',
+      field: 'modicum'
+    }
+  ]
+
+  
+  return (
+    <table className={`table table-striped table-bordered table-hover mb-0`} >
+      <thead>
+        <tr>
+          {
+            headersData.map(item => (
+              <th key={item.field}>{item.label}</th>
+            ))
+          }
+        </tr>
+      </thead>
+
+      <tbody>
+        {
               supplies.map(item => (
                 <tr key={item.id}>
-                  <td>{index}</td>
-                  <td>{item.name}</td>
-                  <td>{item.stock}</td>
-
+                  <td>*</td>
+                  <td><Link to={"/supplies/" + item.id + "/edit"}>{item.name}</Link></td>
+                  <td>{item.description}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.modicum}</td>
                 </tr>
               ))
-            } */}
-          </tbody>
-        </table>
-      )
+            }
+      </tbody>
+    </table>
+  )
 }

@@ -19,6 +19,10 @@ import NewUserPage from "./app/users/NewUserPage.js";
 import UsersListPage from "./app/users/UserListPage.js";
 import EditUserPage from "./app/users/EditUserPage.js";
 
+import SuppliesListPage from "./app/supplies/SupplieListPage.js";
+import NewSuppliePage from "./app/supplies/NewSuppliePage.js"
+import EditSuppliePage from "./app/supplies/EditSuppliePage.js"
+
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
 
@@ -95,11 +99,15 @@ function App() {
                   <Switch>
                     <Route path="/" exact>
                       <Redirect to="/dashboard" />
+
                     </Route>
                     <Route path="/users/new" exact component={NewUserPage} />
                     <Route path="/users" exact component={UsersListPage} />
                     <Route path="/users/:UserId/edit" exact component={EditUserPage} />
                     <Route path="/dashboard" exact component={DashboardPage} />
+                    <Route path="/supplies" exact component={SuppliesListPage} />
+                    <Route path="/supplies/new" exact component={NewSuppliePage} />
+                    <Route path="/supplies/:SupplieId/edit" exact component={EditSuppliePage} />
                     <Route path="*">
                       <Redirect to="/" />
                     </Route>
