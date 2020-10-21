@@ -22,7 +22,7 @@ import EditUserPage from "./app/users/EditUserPage.js";
 import SuppliesListPage from "./app/supplies/SupplieListPage.js";
 import NewSuppliePage from "./app/supplies/NewSuppliePage.js"
 import EditSuppliePage from "./app/supplies/EditSuppliePage.js"
-
+import Notification from "./app/shared/Notifications.js";
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
 
@@ -83,8 +83,9 @@ function App() {
 
   if (isLoggedIn) {
     return (
+   
       <Router history={history}>
-        {/* <Notification></Notification> */}
+        <Notification></Notification>
 
         {/* value={currentSettings} */}
         {/* value={currentUser} */}

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux'
-
+import { useDispatch } from 'react-redux';
 import * as UsersReducer from '../../reducers/users.reducer.js'
 import * as RolesReducer from '../../reducers/roles.reducer.js'
 import Spinner from '../shared/Spinner.js'
+
 // import useFeatureChecker from '../shared/FeatureChecker.js'
 
 
 
 export default function SupplieForm({ supplie, save }) {
     // const CheckFeatures = useFeatureChecker()
+    const dispatch = useDispatch()
     const [name, setName] = useState(supplie.name || '')
     const [description, setDescription] = useState(supplie.description || '')
     // const [rut, setRut] = useState(user.rut || '')
@@ -68,6 +70,8 @@ export default function SupplieForm({ supplie, save }) {
     if (isLoading) {
         return (<Spinner />)
     }
+
+
 
     return (
         <form onSubmit={validate} noValidate>
@@ -130,10 +134,10 @@ export default function SupplieForm({ supplie, save }) {
                 <div className="invalid-feedback">{errors.quantity}</div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group d-flex justify-content-between">
                 <button className={`btn btn-primary ${isLoading ? 'loading' : ''}`} disabled={isLoading}>
                     <span>Guardar</span>
-                    
+
                     {
                         isLoading ?
                             <div className='spinner-border' role='status'></div>
@@ -144,6 +148,7 @@ export default function SupplieForm({ supplie, save }) {
             </div>
 
         </form>
+        
     )
 }
 

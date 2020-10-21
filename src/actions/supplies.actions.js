@@ -48,6 +48,22 @@ export function createFailed(error){
   return { type: CREATE_FAILED, error }
 }
 
+export const DESTROY = '[Supplies] DESTROY';
+export function destroySupplie(data){
+  return { type: UPDATE_ONE, data }
+}
+
+export const DESTROY_SUCCESS = '[Supplies] DESTROY_SUCCESS';
+export function destroySupplieSuccess(supplie){
+  return { type: DESTROY_SUCCESS, supplie }
+}
+
+export const DESTROY_FAILED = '[Supplies] DESTROY_FAILED';
+export function destroySupplieFailed(error){
+  return { type: DESTROY_FAILED, error }
+}
+
+
 export function fetchSupplies(){
     return async function(dispatch, getState){
       dispatch(loadSupplies())
@@ -125,6 +141,40 @@ export function fetchSupplies(){
         console.log('error:', error)
         dispatch(updateNotification('Hubo un error al actualizar el Suministro', 'danger'))
         dispatch(updateOneFailed(error, data.id))
+      }
+    }
+  }
+
+  export function destroySupplieById(SupplieId){
+    return async function(dispatch, getState){
+      dispatch(destroySupplie(SupplieId))
+      console.log('sadasdsad', SupplieId)
+      try{
+        const res = await axios.put(window.config.API_URL + 'delete_supplies/?id=' + SupplieId,
+          // {
+          //   params: {
+          //     id: SupplieId
+          //   }
+          // },
+          {
+            headers: { token: getAuthHeaders(getState()) },
+            token: getAuthHeaders(getState())
+          }
+        );
+  
+        if( res.status === 200 ){
+          dispatch(destroySupplieSuccess(res.data.result))
+          history.push('/supplies')
+          dispatch(updateNotification('Suministro eliminar correctamente', 'success'))
+        }else{
+          dispatch(updateOneFailed(res, SupplieId))
+          dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
+        }
+  
+      }catch(error){
+        console.log('error:', error)
+        dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
+        dispatch(destroySupplieFailed(error, SupplieId))
       }
     }
   }

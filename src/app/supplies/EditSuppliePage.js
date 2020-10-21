@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { getSupplieById } from '../../reducers/supplies.reducer.js'
 
 import * as SupplieActions from '../../actions/supplies.actions.js'
-
+import { destroySupplieById } from '../../actions/supplies.actions.js'; 
 import { getUserById } from '../../reducers/users.reducer.js'
 
 import Container from 'react-bootstrap/Container';
@@ -38,6 +38,9 @@ export default function EditSuppliePage() {
         dispatch(SupplieActions.updateSupplieById(data))
     }
 
+    function destroy(id) {
+        dispatch(destroySupplieById(id))
+    }
 
     return (
         <Container fluid={true} className="my-3">
@@ -54,7 +57,20 @@ export default function EditSuppliePage() {
             <Row className="mb-2">
                 <Col className="col-12 p-0 mb-2 col-lg-6 pr-lg-2">
                     <Card className="shadow">
-                        <Card.Header className="text-white font-weight-bold bg-dark">Datos de suministro</Card.Header>
+                        <Card.Header className="text-white font-weight-bold bg-dark d-flex justify-content-between">Datos de suministro
+                        
+                        {
+                    currentSupplie.id ?
+                        <div>
+                            <button 
+                            onClick={() => destroy(currentSupplie.id)}
+                            className="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </div>
+                        : null
+                }
+                        </Card.Header>
                         <Card.Body>
                             {currentSupplie
                                 ?

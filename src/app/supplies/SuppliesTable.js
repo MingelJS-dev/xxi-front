@@ -30,10 +30,10 @@ export default function SuppliesTable() {
   }
 
   const headersData = [
-    {
-      label: 'Index',
-      field: 'idx',
-    },
+    // {
+    //   label: 'Index',
+    //   field: 'idx',
+    // },
     {
       label: 'Suministro',
       field: 'name',
@@ -73,7 +73,7 @@ export default function SuppliesTable() {
         {
               supplies.map(item => (
                 <tr key={item.id}>
-                  <td>*</td>
+                  {/* <td>*</td> */}
                   <td><Link to={"/supplies/" + item.id + "/edit"}>{item.name}</Link></td>
                   <td>{item.description}</td>
                   <td>{item.quantity}</td>
