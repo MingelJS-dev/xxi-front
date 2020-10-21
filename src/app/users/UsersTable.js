@@ -63,7 +63,7 @@ export default function UsersTable({ tableSize, mode = 'Table' }) {
     )
   }
 
-  if (users.length === 0) {
+  if (users.length === 0 && !isLoading) {
     return <div className="not-found-table-items">No se encontraron usuarios</div>
   }
 

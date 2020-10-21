@@ -150,7 +150,7 @@ export function fetchSupplies(){
       dispatch(destroySupplie(SupplieId))
       console.log('sadasdsad', SupplieId)
       try{
-        const res = await axios.put(window.config.API_URL + 'delete_supplies/?id=' + SupplieId,
+        const res = await axios.delete(window.config.API_URL + 'delete_supplies/?id=' + SupplieId,
           // {
           //   params: {
           //     id: SupplieId
