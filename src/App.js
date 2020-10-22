@@ -22,6 +22,8 @@ import EditUserPage from "./app/users/EditUserPage.js";
 import SuppliesListPage from "./app/supplies/SupplieListPage.js";
 import NewSuppliePage from "./app/supplies/NewSuppliePage.js"
 import EditSuppliePage from "./app/supplies/EditSuppliePage.js"
+
+import TablesListPage from "./app/tables/TableListPage.js"
 import Notification from "./app/shared/Notifications.js";
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
@@ -109,6 +111,7 @@ function App() {
                     <Route path="/supplies" exact component={SuppliesListPage} />
                     <Route path="/supplies/new" exact component={NewSuppliePage} />
                     <Route path="/supplies/:SupplieId/edit" exact component={EditSuppliePage} />
+                    <Route path="/tables" exact component={TablesListPage} />
                     <Route path="*">
                       <Redirect to="/" />
                     </Route>

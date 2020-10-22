@@ -64,5 +64,5 @@ export const getIsLoadingById = (state, SupplieId) => {
       return false
     }
   
-    return state.users.loadingById[SupplieId]
+    return state.supplies.loadingById[SupplieId]
   }

@@ -15,7 +15,9 @@ import {
   faPowerOff,
   faKey,
   faCircle,
-  faList
+  faList,
+  faUtensils,
+  faChessBoard
 } from '@fortawesome/free-solid-svg-icons';
 
 import './sidebar.css'
@@ -37,9 +39,9 @@ function Header() {
   // if (logoURL) {
   //   logo = <Figure.Image width={150} height={160} alt="150x160" src={logoURL} />
   // } else {
-    logo = (
-      <h5 className="text-white font-weight-bold">icon</h5>
-    )
+  logo = (
+    <h5 className="text-white font-weight-bold">icon</h5>
+  )
   // }
 
   return (
@@ -57,23 +59,15 @@ function Header() {
 }
 
 export default function Sidebar({ onChange }) {
-//   const currentUser = useContext(CurrentUserContext)
-//   const currentSettings = useContext(CurrentSettingContext)
+  //   const currentUser = useContext(CurrentUserContext)
   const dispatch = useDispatch()
-//   const CheckFeatures = useFeatureChecker()
-  // const [s , set ] = useState(window.FlutterChannel ? window.FlutterChannel : null)
-  // useEffect(() => {
-  //   if (!window.FlutterChannel) {
-  //     window.FlutterChannel.onMessageReceived = () => {
-  //       console.log(arguments)
-  //     }
-  //   }
-  // }, [])
+  //   const CheckFeatures = useFeatureChecker()
+
 
   const scriptFn = () => {
     if (window.FlutterChannel !== undefined) {
-      const data = JSON.stringify({'action': 'logout'})
-      
+      const data = JSON.stringify({ 'action': 'logout' })
+
       return window.FlutterChannel.postMessage(data);
     } else {
       return console.log('not running inside a Flutter webview');
@@ -120,25 +114,30 @@ export default function Sidebar({ onChange }) {
                 <span>Dashboard</span>
               </NavLink>
             </li>
-
-              <li className="nav-item">
-                <NavLink  to="/products" className="nav-link" onClick={() => onChange()}>
-                  <FontAwesomeIcon icon={faCircle} />
-                  <span>Productos</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink  to="/supplies" className="nav-link" onClick={() => onChange()}>
-                  <FontAwesomeIcon icon={faList} />
-                  <span>Suministros</span>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink  to="/users" className="nav-link" onClick={() => onChange()}>
-                  <FontAwesomeIcon icon={faUsers} />
-                  <span>Usuarios</span>
-                </NavLink>
-              </li>
+            <li className="nav-item">
+              <NavLink to="/tables" className="nav-link" onClick={() => onChange()}>
+                <FontAwesomeIcon icon={faChessBoard} />
+                <span>Mesas</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/products" className="nav-link" onClick={() => onChange()}>
+                <FontAwesomeIcon icon={faUtensils} />
+                <span>Productos</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/supplies" className="nav-link" onClick={() => onChange()}>
+                <FontAwesomeIcon icon={faList} />
+                <span>Suministros</span>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/users" className="nav-link" onClick={() => onChange()}>
+                <FontAwesomeIcon icon={faUsers} />
+                <span>Usuarios</span>
+              </NavLink>
+            </li>
 
 
             {/* <CheckFeatures some={["LIST_ALL_ACCESS", "LIST_PERSONAL_ACCESS"]}>
