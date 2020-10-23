@@ -69,7 +69,7 @@ export function fetchTables(){
       dispatch(loadTables())
   
       try{
-        let url = `${window.config.API_URL}get_all_tables`
+        let url = `${window.config.API_URL}/tables/get_all_tables/`
         url += '?' + toQueryString({page: 1})
 
         const res = await axios.get(url, {

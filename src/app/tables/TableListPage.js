@@ -9,12 +9,11 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 // import { usePagination } from '../shared/Pagination.js'
-// import useSearch from '../shared/Search.js'
 import Header, { HeaderActions } from "../shared/Header.js"
 import useWindowSize from "../shared/WindowSize.js";
 
-// import SuppliesTable from './SuppliesTable.js';
-// import TablesTable from './TablesTable.js';
+
+import TablesTable from './TablesTable.js';
 
 import * as TablesActions from '../../actions/tables.actions.js'
 
@@ -62,12 +61,11 @@ function SuppliesListPage() {
                 <Col className="pt-2 pr-0 pb-0 pl-0">
                     {
                         winSize.width <= 768 ?
-                            //   <SuppliesTable mode='CardList' />
-                            null
+                              <TablesTable mode='CardList' />
                             :
                             <Card>
                                 <Card.Body className="p-0 table-responsive">
-                                    {/* <SuppliesTable /> */}
+                                    <TablesTable />
                                 </Card.Body>
                             </Card>
                     }

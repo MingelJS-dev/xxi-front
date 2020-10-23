@@ -165,7 +165,7 @@ export function fetchSupplies(){
         if( res.status === 200 ){
           dispatch(destroySupplieSuccess(res.data.result))
           history.push('/supplies')
-          dispatch(updateNotification('Suministro eliminar correctamente', 'success'))
+          dispatch(updateNotification('Suministro eliminado correctamente', 'success'))
         }else{
           dispatch(updateOneFailed(res, SupplieId))
           dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
