@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  sample:
+    container_name: centralized-app
+    build:
+      context: .
+      dockerfile: ./compose/production/react.Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3060:80
