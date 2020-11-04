@@ -45,9 +45,6 @@ function SuppliesListPage() {
                         { label: "Listado de mesas" }
                     ]}
                 >
-                    <HeaderActions>
-                        <Link to="/supplies/new" className="btn btn-sm btn-create-user">Crear mesa</Link>
-                    </HeaderActions>
                 </Header>
             </Row>
 

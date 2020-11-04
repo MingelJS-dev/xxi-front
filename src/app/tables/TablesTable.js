@@ -8,6 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -63,11 +66,10 @@ export default function SuppliesTable() {
 
     return (
         <Container fluid={true} className="my-3">
-            <Row>
-
+            <Row xs={1} md={5} className="justify-content-center" >
                 {
                     tables.map(item => (
-                        <Col  className="p-0 m-3">
+                        <Col key={item.id} className="p-0 m-3">
                             <Card className="shadow">
                                 <Card.Header className='card-title  card-hearder'>
                                     <span>Mesa {item.number}</span>
@@ -78,11 +80,27 @@ export default function SuppliesTable() {
                                     <span className="ml-2" >Ocupado por: Nadie </span>
                                 </Card.Body>
                             </Card>
-
                         </Col>
-
                     ))
                 }
+
+                <Col className="p-0 m-3">
+                    <Card className="shadow">
+                        <Card.Header className="card-title card-hearder d-flex justify-content-between align-items-center">
+                            <span>Crear mesa</span>
+                            <button
+                                className="btn btn-light btn-sm"
+                            >
+                                <FontAwesomeIcon icon={faPlus} />
+                            </button>
+                        </Card.Header>
+                        <Card.Body className="p-0 m-3">
+                            <StatusCheck item={{}} />
+                            <FontAwesomeIcon icon={faUser} />
+                            <span className="ml-2" >Ocupado por:  </span>
+                        </Card.Body>
+                    </Card>
+                </Col>
 
 
 
