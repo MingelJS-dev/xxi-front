@@ -24,8 +24,9 @@ export function startLogin(email, password){
       });
 
       if(res.status === 200){
-        dispatch(loginSuccess(res.data.access_token))
+        dispatch(loginSuccess({token: res.data.access_token, role: res.data.rol_name}))
         sessionStorage.setItem('sessionData', JSON.stringify(res.data.access_token));
+        sessionStorage.setItem('role', JSON.stringify(res.data.rol_name));
       }else{
         dispatch(loginFailed(res.statusText))
       }

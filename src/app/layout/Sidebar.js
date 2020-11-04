@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth.actions.js';
-import { CurrentUserContext, CurrentSettingContext } from '../../App.js'
+import { CurrentRoleContext } from '../../App.js'
 
 import Safe from 'react-safe'
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -59,10 +59,9 @@ function Header() {
 }
 
 export default function Sidebar({ onChange }) {
-  //   const currentUser = useContext(CurrentUserContext)
+  const currentRole = useContext(CurrentRoleContext)
   const dispatch = useDispatch()
   //   const CheckFeatures = useFeatureChecker()
-
 
   const scriptFn = () => {
     if (window.FlutterChannel !== undefined) {

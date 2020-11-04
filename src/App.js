@@ -28,7 +28,7 @@ import Notification from "./app/shared/Notifications.js";
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
 
-export const CurrentUserContext = React.createContext({})
+export const CurrentRoleContext = React.createContext({})
 export const CurrentSettingContext = React.createContext({})
 
 // sessionStorage.setItem('device', 'mobile');
@@ -67,7 +67,7 @@ function App() {
   const [isOpen, setOpen] = useState(window.innerWidth >= 768)
   const dispatch = useDispatch();
 
-  // const currentUser = useSelector(state => state.auth.currentUser)
+  const currentRole = useSelector(state => state.auth.currentRole)
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   // const currentSettings = useSelector(getSettings)
 
@@ -92,7 +92,7 @@ function App() {
         {/* value={currentSettings} */}
         {/* value={currentUser} */}
         <CurrentSettingContext.Provider >
-          <CurrentUserContext.Provider>
+          <CurrentRoleContext.Provider value={currentRole}>
             <Container fluid={true} className="p-0">
               <div className="row m-0">
 
@@ -119,7 +119,7 @@ function App() {
                 </Col>
               </div>
             </Container>
-          </CurrentUserContext.Provider>
+          </CurrentRoleContext.Provider>
         </CurrentSettingContext.Provider>
       </Router>
     );
