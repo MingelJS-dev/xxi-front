@@ -27,8 +27,8 @@ export default function auth(state = INITIAL_STATE, action){
       return {
         ...state,
         isLoggedIn: true,
-        token: action.data,
-        currentRole: action.role
+        token: action.data.token,
+        currentRole: action.data.role
       }
 
     case AuthActions.LOGIN_FAILED:

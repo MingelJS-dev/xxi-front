@@ -101,9 +101,6 @@ export default function SuppliesTable() {
                         </Card.Body>
                     </Card>
                 </Col>
-
-
-
             </Row>
         </Container>
     )

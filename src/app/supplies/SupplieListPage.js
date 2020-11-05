@@ -42,7 +42,7 @@ function SuppliesListPage() {
         <Header
           title="Suministros"
           items={[
-            { label: "Listado de suministro" }
+            { label: "Listado de suministros" }
           ]}
         >
           <HeaderActions>
