@@ -4,12 +4,15 @@ const INITIAL_STATE = {
     entities: {},
     ids: [],
     isLoading: false,
-    loadingById: {}
+    loadingById: {},
+    entitiesByProductId: {},
+    idsByProductId: [],
 }
 
 export default function auth(state = INITIAL_STATE, action) {
     switch (action.type) {
         case SuppliesActions.LOAD_SUPPLIES:
+        case SuppliesActions.LOAD_SUPPLIES_BY_PRODUCT:
             return {
                 ...state,
                 isLoading: true
@@ -27,11 +30,22 @@ export default function auth(state = INITIAL_STATE, action) {
             }
 
         case SuppliesActions.LOAD_SUPPLIES_FAILED:
+        case SuppliesActions.LOAD_SUPPLIES_BY_PRODUCT_FAILED:
             return {
                 ...state,
                 isLoading: false
             }
 
+        case SuppliesActions.LOAD_SUPPLIES_BY_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                entitiesByProductId: action.supplies.reduce((acc, item) => {
+                    acc[item.supplies_id] = item
+                    return acc
+                }, {}),
+                idsByProductId: action.supplies.map(x => x.supplies_id)
+            }
 
         case SuppliesActions.UPDATE_ONE:
             return {
@@ -60,9 +74,12 @@ export const getSupplieById = (state, SupplieId) => state.supplies.entities[Supp
 
 export const getIsLoading = state => state.supplies.isLoading
 export const getIsLoadingById = (state, SupplieId) => {
-    if( SupplieId === undefined ){
-      return false
+    if (SupplieId === undefined) {
+        return false
     }
-  
+
     return state.supplies.loadingById[SupplieId]
-  }
+}
+
+export const getSuppliesEntitiesByProductId = state => state.supplies.entitiesByProductId
+export const getSupplieByProductId = state => Object.values(state.supplies.entitiesByProductId)

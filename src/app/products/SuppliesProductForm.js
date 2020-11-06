@@ -26,12 +26,14 @@ const SearchBar = ({ keyword, setKeyword }) => {
 }
 
 
-export default function SuppliesProductForm({ product, save }) {
+export default function SuppliesProductForm({ product, save, suppliesByProduct }) {
 
     const supplies = useSelector(SupplieReducer.getSupplies)
+    let sbyProduct
+
 
     const dispatch = useDispatch()
-    const [suppliesProductSelect, setSuppliesProductSelect] = useState(product.supplies || [])
+    const [suppliesProductSelect, setSuppliesProductSelect] = useState(sbyProduct || [])
     const [supplieList, setSupplieList] = useState([])
     // const [supplieList, setSupplieList] = useState([])
     const [input, setInput] = useState('');
@@ -41,6 +43,22 @@ export default function SuppliesProductForm({ product, save }) {
     //   const globalLoading = useSelector(UsersReducer.getIsLoading)
     //   const localLoading = useSelector(state => UsersReducer.getIsLoadingById(state, user.id))
 
+  
+    useEffect(() => {
+        if (suppliesByProduct && suppliesByProduct.length > 0 ) {
+            sbyProduct = supplies.filter(x => 
+                suppliesByProduct.map(item => item.supplies_id).includes(x.id) 
+                && 
+                suppliesByProduct.map(item => item.food_plate_id).includes(product.id)
+                )
+
+            sbyProduct.map(item => {
+                item.units = suppliesByProduct.filter(x => x.supplies_id === item.id)[0].quantity
+            })
+            setSuppliesProductSelect(sbyProduct)
+        }
+        // console.log(suppliesByProduct)
+    }, [])
 
     const isLoading = false
 
@@ -121,12 +139,24 @@ export default function SuppliesProductForm({ product, save }) {
 
     const changeUnits = (value, id) => {
         //  suppliesProductSelect.filter(x => x.id === parseInt(id))[0].units = value
-        if (suppliesProductSelect.filter(x => x.id === parseInt(id))) {
-            suppliesProductSelect.filter(x => x.id === parseInt(id))[0].units = parseInt(value)
+        if (product && product.id) {
+            if (suppliesProductSelect.filter(x => x.id === parseInt(id))) {
+                suppliesProductSelect.filter(x => x.id === parseInt(id))[0].newUnits = parseInt(value)
+            }
+        } else {
+            if (suppliesProductSelect.filter(x => x.id === parseInt(id))) {
+                suppliesProductSelect.filter(x => x.id === parseInt(id))[0].units = parseInt(value)
+            }
         }
 
+       
         save(suppliesProductSelect)
     }
+
+    function saveChange() {
+        console.log(suppliesProductSelect)
+    }
+ 
 
 
     return (
@@ -188,7 +218,7 @@ export default function SuppliesProductForm({ product, save }) {
                                                             className={`form-control ${errors.units ? 'is-invalid' : ''}`}
                                                             onChange={(x) => changeUnits(x.target.value, x.target.id)}
                                                             disabled={isLoading}
-                                                            placeholder='Ingresar unidades...'
+                                                            placeholder={item.units ? item.units : 'Ingresar unidades...'}
                                                         />
 
                                                         <div className="invalid-feedback">{errors.units}</div>
@@ -209,6 +239,20 @@ export default function SuppliesProductForm({ product, save }) {
                     }
                 </Col>
             </Row>
+            <div className="form-group d-flex justify-content-center">
+                <button className={`btn btn-primary ${isLoading ? 'loading' : ''}`} 
+                disabled={isLoading}
+                onClick={ async () => await saveChange()}>
+                    <span>Guardar</span>
+
+                    {
+                        isLoading ?
+                            <div className='spinner-border' role='status'></div>
+                            : null
+                    }
+
+                </button>
+            </div>
         </Container>
 
     )

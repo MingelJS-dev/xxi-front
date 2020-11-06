@@ -95,9 +95,9 @@ function LoginPage() {
                   </Form.Group>
               }
             </Form>
-            <Card.Footer>
+            {/* <Card.Footer>
                 <p className="message d-flex justify-content-center mt-3 mb-0"> <Link to={`/users/new`}>Crear usuario</Link></p>
-                </Card.Footer>
+                </Card.Footer> */}
           </Card.Body>
         </Card>
       </div>

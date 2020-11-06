@@ -9,6 +9,9 @@ import Card from 'react-bootstrap/Card';
 import SuppliesTable from '../supplies/SuppliesTable.js'
 import * as SuppliesActions from '../../actions/supplies.actions.js'
 
+import ProductsTable from '../products/ProductsTable.js'
+import * as ProductActions from '../../actions/products.actions.js'
+
 import Spinner from '../shared/Spinner.js';
 import Header from '../shared/Header.js'
 
@@ -24,6 +27,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     dispatch(SuppliesActions.fetchSupplies())
+    dispatch(ProductActions.fetchProducts())
   }, [dispatch])
 
   // useEffect(() => {
@@ -57,10 +61,10 @@ export default function DashboardPage() {
             <Col sm={12} className="p-0">
               <Card className="shadow">
                 <Card.Header className='card-title card-hearder'>
-                  <span>Ranking</span>
+                  <span>Productos</span>
                 </Card.Header>
                 <Card.Body className="p-0">
-                  <SuppliesTable />
+                  <ProductsTable />
                 </Card.Body>
               </Card>
 

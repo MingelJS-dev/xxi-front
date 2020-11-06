@@ -3,8 +3,10 @@ import { CurrentSettingContext } from '../../App.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getProductById } from '../../reducers/product.reducer.js'
+import { getSupplieByProductId } from '../../reducers/supplies.reducer.js'
 
 import * as ProductActions from '../../actions/products.actions.js'
+import * as SupplieActions from '../../actions/supplies.actions.js'
 import { destroyById } from '../../actions/products.actions.js'; 
 
 
@@ -17,29 +19,42 @@ import Spinner from '../shared/Spinner.js';
 import Header from "../shared/Header.js"
 
 import ProductForm from './ProductForm.js'
+import SuppliesProductForm from './SuppliesProductForm.js'
 
 export default function EditProductPage() {
     const dispatch = useDispatch()
     const params = useParams()
+    const [supplies, setSupplies] = useState([])
+
 
     useEffect(() => {
         dispatch(ProductActions.fetchProducts())
-    }, [dispatch, params.SupplieId])
+        dispatch(SupplieActions.getAllSuppliesByProductId(params.ProductId))
+        dispatch(SupplieActions.fetchSupplies())
+    }, [dispatch, params.ProductId])
 
     const currentProduct = useSelector(state => getProductById(state, params.ProductId))
-    if (!currentProduct) {
+    const currentSupplies = useSelector(state => getSupplieByProductId(state, params.ProductId))
+
+    if (!currentProduct && !currentSupplies) {
         return (
             <Spinner full={true} />
         )
     }
 
 
+
     function updateProduct(data) {
         dispatch(ProductActions.updateById(data))
     }
 
+
     function destroy(id) {
         dispatch(destroyById(id))
+    }
+
+    const saveSupplies = async (data) => {
+        setSupplies(data)
     }
 
     return (
@@ -54,12 +69,12 @@ export default function EditProductPage() {
                 >
                 </Header>
             </Row>
-            <Row className="mb-2">
-                <Col className="col-12 p-0 mb-2 col-lg-6 pr-lg-2">
+            <Row className="mb-2 d-flex justify-content-between">
+                <Col className="col-12 p-0 col-lg-3">
                     <Card className="shadow">
                         <Card.Header className="text-white font-weight-bold bg-dark d-flex justify-content-between">Datos de suministro
                         
-                        {
+                        {/* {
                     currentProduct.id ?
                         <div>
                             <button 
@@ -69,7 +84,7 @@ export default function EditProductPage() {
                             </button>
                         </div>
                         : null
-                }
+                } */}
                         </Card.Header>
                         <Card.Body>
                             {currentProduct
@@ -80,6 +95,27 @@ export default function EditProductPage() {
                                 />
                                 : <Spinner />
                             }
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col className="col-12 p-0 col-lg-8">
+                    <Card className="mb-3">
+                        <Card.Header className="card-title bg-dark">
+                            <span>Actualizar suministros</span>
+                        </Card.Header>
+                        <Card.Body>
+
+                        {currentProduct
+                                ?
+                                <SuppliesProductForm
+                                product={currentProduct}
+                                save={saveSupplies}
+                                suppliesByProduct={currentSupplies}
+                                // saveChange={saveChange}
+                            />
+                                : <Spinner />
+                            }
+                
                         </Card.Body>
                     </Card>
                 </Col>

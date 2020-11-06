@@ -18,6 +18,21 @@ export function loadSuppliesFailed(error){
   return { type: LOAD_SUPPLIES_FAILED, error }
 }
 
+export const LOAD_SUPPLIES_BY_PRODUCT = '[Supplies] LOAD_SUPPLIES_BY_PRODUCT';
+export function loadSuppliesByProductId(data){
+  return { type: LOAD_SUPPLIES_BY_PRODUCT, data}
+}
+
+export const LOAD_SUPPLIES_BY_PRODUCT_SUCCESS = '[Supplies] LOAD_SUPPLIES_BY_PRODUCT_SUCCESS';
+export function loadSuppliesByProductIdSuccess(supplies){
+  return { type: LOAD_SUPPLIES_BY_PRODUCT_SUCCESS, supplies }
+}
+
+export const LOAD_SUPPLIES_BY_PRODUCT_FAILED = '[Supplies] LOAD_SUPPLIES_BY_PRODUCT_FAILED';
+export function loadSuppliesByProductIdFailed(error, ProductId){
+  return { type: LOAD_SUPPLIES_BY_PRODUCT_FAILED, error, ProductId }
+}
+
 export const UPDATE_ONE = '[Supplies] UPDATE_ONE';
 export function updateOne(data){
   return { type: UPDATE_ONE, data }
@@ -62,6 +77,21 @@ export const DESTROY_FAILED = '[Supplies] DESTROY_FAILED';
 export function destroySupplieFailed(error){
   return { type: DESTROY_FAILED, error }
 }
+
+// export const DESTROY_BY_PRODUCT = '[Supplies] DESTROY_BY_PRODUCT';
+// export function destroySupplie(data){
+//   return { type: UPDATE_ONE, data }
+// }
+
+// export const DESTROY_BY_PRODUCT_SUCCESS = '[Supplies] DESTROY_BY_PRODUCT_SUCCESS';
+// export function destroySupplieSuccess(supplie){
+//   return { type: DESTROY_SUCCESS, supplie }
+// }
+
+// export const DESTROY_BY_PRODUCT_FAILED = '[Supplies] DESTROY_BY_PRODUCT_FAILED';
+// export function destroySupplieFailed(error){
+//   return { type: DESTROY_BY_PRODUCT_FAILED, error }
+// }
 
 
 export function fetchSupplies(){
@@ -148,7 +178,7 @@ export function fetchSupplies(){
   export function destroySupplieById(SupplieId){
     return async function(dispatch, getState){
       dispatch(destroySupplie(SupplieId))
-      console.log('sadasdsad', SupplieId)
+
       try{
         const res = await axios.delete(window.config.API_URL + 'delete_supplies/?id=' + SupplieId,
           // {
@@ -175,6 +205,41 @@ export function fetchSupplies(){
         console.log('error:', error)
         dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
         dispatch(destroySupplieFailed(error, SupplieId))
+      }
+    }
+  }
+
+  export function getAllSuppliesByProductId(ProductId){
+    return async function(dispatch, getState){
+      dispatch(loadSuppliesByProductId(ProductId))
+
+      try{
+        // /supplies_food_plates/get_all_supplies_food_plates/?food_plate_id=13"
+        const res = await axios.get(window.config.API_URL + 'supplies_food_plates/get_all_supplies_food_plates/?food_plate_id=' + ProductId,
+          // {
+          //   params: {
+          //     id: SupplieId
+          //   }
+          // },
+          {
+            headers: { token: getAuthHeaders(getState()) },
+            token: getAuthHeaders(getState())
+          }
+        );
+  
+        if( res.status === 200 ){
+          dispatch(loadSuppliesByProductIdSuccess(res.data))
+          // history.push('/supplies')
+          // dispatch(updateNotification('Suministro eliminado correctamente', 'success'))
+        }else{
+          dispatch(loadSuppliesByProductIdFailed(res, ProductId))
+          // dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
+        }
+  
+      }catch(error){
+        console.log('error:', error)
+        // dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
+        dispatch(loadSuppliesByProductIdFailed(error, ProductId))
       }
     }
   }

@@ -14,7 +14,7 @@ import {
   faUsers,
   faPowerOff,
   faKey,
-  faCircle,
+  faSpinner,
   faList,
   faUtensils,
   faChessBoard
@@ -110,19 +110,19 @@ export default function Sidebar({ onChange }) {
             <li className="nav-item">
               <NavLink to="/dashboard" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faTachometerAlt} />
-                <span>Dashboard</span>
+                <span>Dashboard (50%)</span>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/tables" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faChessBoard} />
-                <span>Mesas</span>
+                <span>Mesas (30%)</span>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/products" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faUtensils} />
-                <span>Productos</span>
+                <span>Productos (70%)</span>
               </NavLink>
             </li>
             <li className="nav-item">
@@ -135,6 +135,20 @@ export default function Sidebar({ onChange }) {
               <NavLink to="/users" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faUsers} />
                 <span>Usuarios</span>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink to="/dev" className="nav-link" onClick={() => onChange()}>
+                <FontAwesomeIcon icon={faSpinner} />
+                <span>Reservas (En desarrollo)</span>
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink to="/dev" className="nav-link" onClick={() => onChange()}>
+                <FontAwesomeIcon icon={faSpinner} />
+                <span>Ordenes (En desarrollo)</span>
               </NavLink>
             </li>
 

@@ -57,7 +57,7 @@ export default function NewProductPage() {
                     title="Nuevo producto"
                     items={[
                         { label: "Listado de products", to: "/products" },
-                        { label: "Nuevo product" },
+                        { label: "Nuevo producto" },
                     ]}
                 />
             </Row>
