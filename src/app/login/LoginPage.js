@@ -34,7 +34,7 @@ function Header(){
         : null
       }
       <Figure.Caption>
-        <h4 className="pt-2">Restauran XXI</h4>
+        <h4 className="pt-2">Restaurant XXI</h4>
       </Figure.Caption>
     </Figure>
   )

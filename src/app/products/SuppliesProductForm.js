@@ -58,7 +58,7 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
             setSuppliesProductSelect(sbyProduct)
         }
         // console.log(suppliesByProduct)
-    }, [])
+    }, [sbyProduct])
 
     const isLoading = false
 
@@ -239,7 +239,10 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
                     }
                 </Col>
             </Row>
-            <div className="form-group d-flex justify-content-center">
+            {
+                (suppliesByProduct && 
+                suppliesByProduct.length > 0) ? 
+                <div className="form-group d-flex justify-content-center">
                 <button className={`btn btn-primary ${isLoading ? 'loading' : ''}`} 
                 disabled={isLoading}
                 onClick={ async () => await saveChange()}>
@@ -252,7 +255,10 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
                     }
 
                 </button>
-            </div>
+            </div> : ''
+
+            }
+ 
         </Container>
 
     )

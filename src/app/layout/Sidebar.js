@@ -23,7 +23,7 @@ import {
 import './sidebar.css'
 
 import * as AuthReducer from '../../reducers/auth.reducer.js'
-
+import xxi from "../../assets/images/xxi.png"
 // import useFeatureChecker from '../shared/FeatureChecker.js'
 
 function Header() {
@@ -37,11 +37,11 @@ function Header() {
   let logo
 
   // if (logoURL) {
-  //   logo = <Figure.Image width={150} height={160} alt="150x160" src={logoURL} />
+    logo = <Figure.Image width={100} height={100} alt="100x100" src={xxi} />
   // } else {
-  logo = (
-    <h5 className="text-white font-weight-bold">icon</h5>
-  )
+  // logo = (
+  //   <h5 className="text-white font-weight-bold">icon</h5>
+  // )
   // }
 
   return (
