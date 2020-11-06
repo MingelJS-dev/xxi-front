@@ -9,6 +9,7 @@ import Figure from 'react-bootstrap/Figure';
 
 import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as Permission from '../shared/utils.js'
 import {
   faTachometerAlt,
   faUsers,
@@ -37,7 +38,7 @@ function Header() {
   let logo
 
   // if (logoURL) {
-    logo = <Figure.Image width={100} height={100} alt="100x100" src={xxi} />
+  logo = <Figure.Image width={100} height={100} alt="100x100" src={xxi} />
   // } else {
   // logo = (
   //   <h5 className="text-white font-weight-bold">icon</h5>
@@ -113,30 +114,50 @@ export default function Sidebar({ onChange }) {
                 <span>Dashboard (50%)</span>
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/tables" className="nav-link" onClick={() => onChange()}>
-                <FontAwesomeIcon icon={faChessBoard} />
-                <span>Mesas (30%)</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/products" className="nav-link" onClick={() => onChange()}>
-                <FontAwesomeIcon icon={faUtensils} />
-                <span>Productos (70%)</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/supplies" className="nav-link" onClick={() => onChange()}>
-                <FontAwesomeIcon icon={faList} />
-                <span>Suministros</span>
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/users" className="nav-link" onClick={() => onChange()}>
-                <FontAwesomeIcon icon={faUsers} />
-                <span>Usuarios</span>
-              </NavLink>
-            </li>
+            {
+              Permission.tableView(currentRole) ?
+                <li className="nav-item">
+                  <NavLink to="/tables" className="nav-link" onClick={() => onChange()}>
+                    <FontAwesomeIcon icon={faChessBoard} />
+                    <span>Mesas (30%)</span>
+                  </NavLink>
+                </li>
+                : ''
+            }
+            {
+              Permission.productView(currentRole) ?
+                <li className="nav-item">
+                  <NavLink to="/products" className="nav-link" onClick={() => onChange()}>
+                    <FontAwesomeIcon icon={faUtensils} />
+                    <span>Productos (70%)</span>
+                  </NavLink>
+                </li>
+                :
+                ''
+            }
+
+            {
+              Permission.supplieView(currentRole) ?
+                <li className="nav-item">
+                  <NavLink to="/supplies" className="nav-link" onClick={() => onChange()}>
+                    <FontAwesomeIcon icon={faList} />
+                    <span>Suministros</span>
+                  </NavLink>
+                </li>
+                :
+                ''
+            }
+            {
+              Permission.userView(currentRole) ?
+                <li className="nav-item">
+                  <NavLink to="/users" className="nav-link" onClick={() => onChange()}>
+                    <FontAwesomeIcon icon={faUsers} />
+                    <span>Usuarios</span>
+                  </NavLink>
+                </li>
+                :
+                ''
+            }
 
             <li className="nav-item">
               <NavLink to="/dev" className="nav-link" onClick={() => onChange()}>
@@ -146,7 +167,7 @@ export default function Sidebar({ onChange }) {
             </li>
 
             <li className="nav-item">
-              <NavLink to="/dev" className="nav-link" onClick={() => onChange()}>
+              <NavLink to="/dev1" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faSpinner} />
                 <span>Ordenes (En desarrollo)</span>
               </NavLink>

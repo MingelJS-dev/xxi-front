@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 
 import history from "./history.js";
 import useWindowSize from "./app/shared/WindowSize.js";
-
+import * as Permission from "./app/shared/utils.js"
 import LoginPage from "./app/login/LoginPage.js";
 import Sidebar from "./app/layout/Sidebar.js";
 import DashboardPage from "./app/dashboard/DashboardPage.js";
@@ -90,7 +90,7 @@ function App() {
 
   if (isLoggedIn) {
     return (
-   
+
       <Router history={history}>
         <Notification></Notification>
 
@@ -109,21 +109,67 @@ function App() {
                       <Redirect to="/dashboard" />
 
                     </Route>
-                    <Route path="/users/new" exact component={NewUserPage} />
-                    <Route path="/users" exact component={UsersListPage} />
-                    <Route path="/users/:UserId/edit" exact component={EditUserPage} />
                     <Route path="/dashboard" exact component={DashboardPage} />
-                    <Route path="/supplies" exact component={SuppliesListPage} />
-                    <Route path="/supplies/new" exact component={NewSuppliePage} />
-                    <Route path="/supplies/:SupplieId/edit" exact component={EditSuppliePage} />
-                    <Route path="/tables" exact component={TablesListPage} />
 
-                    <Route path="/products" exact component={ProductListPage} />
-                    <Route path="/products/new" exact component={NewProductPage} />
-                    <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
-                    <Route path="*">
-                      <Redirect to="/" />
-                    </Route>
+                    {
+                      Permission.isAdmin(currentRole) &&
+                      <Switch>
+                        <Route path="/users/new" exact component={NewUserPage} />
+                        <Route path="/users" exact component={UsersListPage} />
+                        <Route path="/users/:UserId/edit" exact component={EditUserPage} />
+                        <Route path="/dashboard" exact component={DashboardPage} />
+                        <Route path="/supplies" exact component={SuppliesListPage} />
+                        <Route path="/supplies/new" exact component={NewSuppliePage} />
+                        <Route path="/supplies/:SupplieId/edit" exact component={EditSuppliePage} />
+                        <Route path="/tables" exact component={TablesListPage} />
+                        <Route path="/products" exact component={ProductListPage} />
+                        <Route path="/products/new" exact component={NewProductPage} />
+                        <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
+
+                        <Route path="*">
+                          <Redirect to="/" />
+                        </Route>
+                      </Switch>
+                    }
+                    {
+                      Permission.isCellar(currentRole) &&
+                      <Switch>
+                        <Route path="/supplies" exact component={SuppliesListPage} />
+                        <Route path="/supplies/new" exact component={NewSuppliePage} />
+                        <Route path="/supplies/:SupplieId/edit" exact component={EditSuppliePage} />
+                        <Route path="*">
+                          <Redirect to="/" />
+                        </Route>
+                      </Switch>
+                    }
+                    {
+                      Permission.isKitchen(currentRole) &&
+                      <Switch>
+                        <Route path="/products" exact component={ProductListPage} />
+                        <Route path="/products/new" exact component={NewProductPage} />
+                        <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
+                        <Route path="*">
+                          <Redirect to="/" />
+                        </Route>
+                      </Switch>
+                    }
+                    {/* {
+                      Permission.isAdmin(currentRole) &&
+                      <div>
+                        <Route path="/users/new" exact component={NewUserPage} />
+                        <Route path="/users" exact component={UsersListPage} />
+                        <Route path="/users/:UserId/edit" exact component={EditUserPage} />
+                        <Route path="/dashboard" exact component={DashboardPage} />
+                        <Route path="/supplies" exact component={SuppliesListPage} />
+                        <Route path="/supplies/new" exact component={NewSuppliePage} />
+                        <Route path="/supplies/:SupplieId/edit" exact component={EditSuppliePage} />
+                        <Route path="/tables" exact component={TablesListPage} />
+                        <Route path="/products" exact component={ProductListPage} />
+                        <Route path="/products/new" exact component={NewProductPage} />
+                        <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
+                      </div>
+                    } */}
+
                   </Switch>
                 </Col>
               </div>
