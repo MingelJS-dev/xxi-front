@@ -76,7 +76,7 @@ export default function ProductsTable() {
                   {/* <td>*</td> */}
                   <td><Link to={"/products/" + item.id + "/edit"}>{item.name}</Link></td>
                   <td>${item.price}</td>
-                  <td> - </td> 
+                  <td> En desarrollo </td> 
 
                 </tr>
               ))

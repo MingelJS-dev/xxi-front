@@ -11,7 +11,7 @@ import SupplieForm from './SupplieForm.js'
 import * as SupplieActions from '../../actions/supplies.actions.js'
 import Header from '../shared/Header.js'
 
-export default function NewUserPage(){
+export default function NewSuppliePage(){
   const dispatch = useDispatch()
 
   useEffect(() => {

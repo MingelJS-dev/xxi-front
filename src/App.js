@@ -27,6 +27,8 @@ import TablesListPage from "./app/tables/TableListPage.js"
 import Notification from "./app/shared/Notifications.js";
 
 import ProductListPage from "./app/products/ProductListPage.js";
+import NewProductPage from "./app/products/NewProductPage.js";
+import EditProductPage from "./app/products/EditProductPage.js";
 
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
@@ -117,6 +119,8 @@ function App() {
                     <Route path="/tables" exact component={TablesListPage} />
 
                     <Route path="/products" exact component={ProductListPage} />
+                    <Route path="/products/new" exact component={NewProductPage} />
+                    <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
                     <Route path="*">
                       <Redirect to="/" />
                     </Route>

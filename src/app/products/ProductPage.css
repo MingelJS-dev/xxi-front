@@ -1,0 +1,9 @@
+.cardPointer {
+    cursor: pointer;
+}
+
+.cardPointer:hover {
+    background-color: #003C5C !important;
+    color: white !important;
+}
+

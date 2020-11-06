@@ -104,31 +104,4 @@ export default function SuppliesTable() {
             </Row>
         </Container>
     )
-    //   return (
-    //     <table className={`table table-striped table-bordered table-hover mb-0`} >
-    //       <thead>
-    //         <tr>
-    //           {
-    //             headersData.map(item => (
-    //               <th key={item.field}>{item.label}</th>
-    //             ))
-    //           }
-    //         </tr>
-    //       </thead>
-
-    //       <tbody>
-    //         {
-    //             //   tables.map(item => (
-    //             //     <tr key={item.id}>
-    //             //       {/* <td>*</td> */}
-    //             //       <td><Link to={"/tables/" + item.id + "/edit"}>{item.name}</Link></td>
-    //             //       <td>{item.description}</td>
-    //             //       <td>{item.quantity}</td>
-    //             //       <td>{item.modicum}</td>
-    //             //     </tr>
-    //             //   ))
-    //             }
-    //       </tbody>
-    //     </table>
-    //   )
 }

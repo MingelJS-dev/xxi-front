@@ -93,7 +93,7 @@ export function fetchProducts(){
     return async function(dispatch, getState){
       dispatch(createProduct(data))
       try{
-        const res = await axios.post(window.config.API_URL + 'create_food_plates',
+        const res = await axios.post(window.config.API_URL + 'food_plates/create_food_plates',
           data,
           {
             headers: { token: getAuthHeaders(getState()) },
@@ -122,7 +122,7 @@ export function fetchProducts(){
       dispatch(updateOne(data))
   
       try{
-        const res = await axios.put(window.config.API_URL + 'update_supplies',
+        const res = await axios.put(window.config.API_URL + 'food_plates/update_food_plates',
           data,
           {
             headers: { token: getAuthHeaders(getState()) },
@@ -151,7 +151,7 @@ export function fetchProducts(){
       dispatch(destroy(ProductId))
 
       try{
-        const res = await axios.delete(window.config.API_URL + 'delete_food_plates/?id=' + ProductId,
+        const res = await axios.delete(window.config.API_URL + 'food_plates/delete_food_plates/?id=' + ProductId,
           // {
           //   params: {
           //     id: SupplieId
