@@ -55,7 +55,7 @@ export default function UsersTable({ tableSize, mode = 'Table' }) {
   const isLoading = useSelector(UserReducer.getIsLoading)
   const roles = useSelector(RolesReducer.getRoles)
 
-  if (isLoading && roles.length > 0) {
+  if (isLoading && roles.length > 0 || users.length === 0) {
     return (
       <div className="container-lg py-4 p-0 text-center">
         <Spinner />
