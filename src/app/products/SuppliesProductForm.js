@@ -33,8 +33,9 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
 
 
     const dispatch = useDispatch()
-    const [suppliesProductSelect, setSuppliesProductSelect] = useState(sbyProduct || [])
+    const [suppliesProductSelect, setSuppliesProductSelect] = useState([])
     const [supplieList, setSupplieList] = useState([])
+    const [stateForm, setStateForm] = useState(true)
     // const [supplieList, setSupplieList] = useState([])
     const [input, setInput] = useState('');
     const [errors, setErrors] = useState({})
@@ -45,7 +46,7 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
 
   
     useEffect(() => {
-        if (suppliesByProduct && suppliesByProduct.length > 0 ) {
+        if (suppliesByProduct && suppliesByProduct.length > 0 && stateForm ) {
             sbyProduct = supplies.filter(x => 
                 suppliesByProduct.map(item => item.supplies_id).includes(x.id) 
                 && 
@@ -56,9 +57,10 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
                 item.units = suppliesByProduct.filter(x => x.supplies_id === item.id)[0].quantity
             })
             setSuppliesProductSelect(sbyProduct)
+            setStateForm(false)
         }
         // console.log(suppliesByProduct)
-    }, [sbyProduct])
+    }, [suppliesByProduct, suppliesByProduct.length])
 
     const isLoading = false
 

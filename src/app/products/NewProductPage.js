@@ -56,7 +56,7 @@ export default function NewProductPage() {
                 <Header
                     title="Nuevo producto"
                     items={[
-                        { label: "Listado de products", to: "/products" },
+                        { label: "Listado de productOs", to: "/products" },
                         { label: "Nuevo producto" },
                     ]}
                 />

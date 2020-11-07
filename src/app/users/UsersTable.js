@@ -74,7 +74,7 @@ export default function UsersTable({ tableSize, mode = 'Table' }) {
           users.map(item => (
             <div
               key={item.id}
-              onClick={() => history.push(`/users/${item.id}`)}
+              onClick={() => history.push(`/users/${item.id}/edit`)}
               className="card mb-2 shadow"
             >
               <Row className="card-body d-flex w-100 justify-content-between align-items-center">

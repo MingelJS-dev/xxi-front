@@ -74,8 +74,8 @@ export default function EditProductPage() {
                     <Card className="shadow">
                         <Card.Header className="text-white font-weight-bold bg-dark d-flex justify-content-between">Datos de suministro
                         
-                        {/* {
-                    currentProduct.id ?
+                         {
+                   currentProduct &&  currentProduct.id ?
                         <div>
                             <button 
                             onClick={() => destroy(currentProduct.id)}
@@ -84,7 +84,7 @@ export default function EditProductPage() {
                             </button>
                         </div>
                         : null
-                } */}
+                } 
                         </Card.Header>
                         <Card.Body>
                             {currentProduct
@@ -105,7 +105,7 @@ export default function EditProductPage() {
                         </Card.Header>
                         <Card.Body>
 
-                        {currentProduct
+                        {currentProduct && currentSupplies
                                 ?
                                 <SuppliesProductForm
                                 product={currentProduct}
