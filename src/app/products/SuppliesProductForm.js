@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import * as SupplieReducer from '../../reducers/supplies.reducer.js'
 import './ProductPage.css'
+import { getSupplieByProductId } from '../../reducers/supplies.reducer.js'
 
 const SearchBar = ({ keyword, setKeyword }) => {
     const BarStyling = { width: "20rem", background: "#F2F1F9", border: "none", padding: "0.5rem" };
@@ -39,14 +40,19 @@ export default function SuppliesProductForm({ product, save, updateSupplies, del
     // const [supplieList, setSupplieList] = useState([])
     const [input, setInput] = useState('');
     const [errors, setErrors] = useState({})
+    const currentSupplies = useSelector(state => getSupplieByProductId(state))
 
-
-    //   const globalLoading = useSelector(UsersReducer.getIsLoading)
+      const globalLoading = useSelector(SupplieReducer.getIsLoading)
     //   const localLoading = useSelector(state => UsersReducer.getIsLoadingById(state, user.id))
 
-  
+ 
+
     useEffect(() => {
-        if (suppliesByProduct && suppliesByProduct.length > 0 && stateForm && supplies && supplies.length ) {
+       
+        if (suppliesByProduct && suppliesByProduct.length > 0 && stateForm && supplies && supplies.length 
+            && currentSupplies && currentSupplies.length > 0) {
+                
+                suppliesByProduct = currentSupplies
             sbyProduct = supplies.filter(x => 
                 suppliesByProduct.map(item => item.supplies_id).includes(x.id) 
                 && 
@@ -57,10 +63,13 @@ export default function SuppliesProductForm({ product, save, updateSupplies, del
                 item.units = suppliesByProduct.filter(x => x.supplies_id === item.id)[0].quantity
             })
             setSuppliesProductSelect(sbyProduct)
-         
-            // console.log(suppliesByProduct, product.id)
-            setStateForm(false)
+        
+            // console.log(sbyProduct, product.id)
+            if(sbyProduct && sbyProduct.length) {
+                setStateForm(false)
+            }
         }
+
         // console.log(suppliesByProduct)
     }, [suppliesByProduct, suppliesByProduct ? suppliesByProduct.length : '',
      supplies, supplies ? supplies.length : ''])
@@ -221,7 +230,7 @@ export default function SuppliesProductForm({ product, save, updateSupplies, del
                         </Col>
                     </Row>
                     {
-                        suppliesProductSelect.map(item =>
+                        suppliesProductSelect.length > 0 ? suppliesProductSelect.map(item =>
                             <Row key={item.id}>
                                 <Col className="p-0 m-3">
                                     <Card
@@ -258,7 +267,7 @@ export default function SuppliesProductForm({ product, save, updateSupplies, del
                                     </Card>
                                 </Col>
                             </Row>
-                        )
+                        ) : <Spinner />
                     }
                 </Col>
             </Row>

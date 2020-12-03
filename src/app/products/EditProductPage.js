@@ -25,16 +25,17 @@ export default function EditProductPage() {
     const dispatch = useDispatch()
     const params = useParams()
     const [supplies, setSupplies] = useState([])
+    const currentProduct = useSelector(state => getProductById(state, params.ProductId))
+    const currentSupplies = useSelector(state => getSupplieByProductId(state))
 
+    useEffect( () => {
+         dispatch(ProductActions.fetchProducts())
+         dispatch(SupplieActions.getAllSuppliesByProductId(params.ProductId))
+         dispatch(SupplieActions.fetchSupplies())
 
-    useEffect(() => {
-        dispatch(ProductActions.fetchProducts())
-        dispatch(SupplieActions.getAllSuppliesByProductId(params.ProductId))
-        dispatch(SupplieActions.fetchSupplies())
     }, [dispatch, params.ProductId])
 
-    const currentProduct = useSelector(state => getProductById(state, params.ProductId))
-    const currentSupplies = useSelector(state => getSupplieByProductId(state, params.ProductId))
+  
 
     if (!currentProduct && !currentSupplies) {
         return (
