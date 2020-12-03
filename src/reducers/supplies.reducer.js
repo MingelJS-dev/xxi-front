@@ -82,4 +82,6 @@ export const getIsLoadingById = (state, SupplieId) => {
 }
 
 export const getSuppliesEntitiesByProductId = state => state.supplies.entitiesByProductId
-export const getSupplieByProductId = state => Object.values(state.supplies.entitiesByProductId)
+export const getSupplieByProductId = (state) => {
+    return Object.values(state.supplies.entitiesByProductId)
+} 

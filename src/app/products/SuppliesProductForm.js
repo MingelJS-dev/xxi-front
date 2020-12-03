@@ -26,7 +26,7 @@ const SearchBar = ({ keyword, setKeyword }) => {
 }
 
 
-export default function SuppliesProductForm({ product, save, suppliesByProduct }) {
+export default function SuppliesProductForm({ product, save, updateSupplies, deleteSupplie, suppliesByProduct }) {
 
     const supplies = useSelector(SupplieReducer.getSupplies)
     let sbyProduct
@@ -46,7 +46,7 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
 
   
     useEffect(() => {
-        if (suppliesByProduct && suppliesByProduct.length > 0 && stateForm ) {
+        if (suppliesByProduct && suppliesByProduct.length > 0 && stateForm && supplies && supplies.length ) {
             sbyProduct = supplies.filter(x => 
                 suppliesByProduct.map(item => item.supplies_id).includes(x.id) 
                 && 
@@ -57,10 +57,13 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
                 item.units = suppliesByProduct.filter(x => x.supplies_id === item.id)[0].quantity
             })
             setSuppliesProductSelect(sbyProduct)
+         
+            // console.log(suppliesByProduct, product.id)
             setStateForm(false)
         }
         // console.log(suppliesByProduct)
-    }, [suppliesByProduct, suppliesByProduct.length])
+    }, [suppliesByProduct, suppliesByProduct ? suppliesByProduct.length : '',
+     supplies, supplies ? supplies.length : ''])
 
     const isLoading = false
 
@@ -137,6 +140,10 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
 
         // setSupplieList([...supplieList, item])
         save(suppliesProductSelect)
+        if(product && product.id) {
+            let [productSupplie] = suppliesByProduct.filter(x => item.id = x.supplies_id)
+            deleteSupplie(productSupplie.id)
+        }
     }
 
     const changeUnits = (value, id) => {
@@ -156,9 +163,23 @@ export default function SuppliesProductForm({ product, save, suppliesByProduct }
     }
 
     function saveChange() {
-        console.log(suppliesProductSelect)
+        let data = []
+
+        suppliesProductSelect.map(item => {
+            let object = {}
+
+            object = {
+                quantity: item.newUnits ? item.newUnits : item.units,
+                food_plate_id: product.id,
+                supplies_id: item.id 
+            }
+
+            data.push(object)
+        })
+        updateSupplies(data)
     }
  
+
 
 
     return (

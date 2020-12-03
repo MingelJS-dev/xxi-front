@@ -229,16 +229,12 @@ export function fetchSupplies(){
   
         if( res.status === 200 ){
           dispatch(loadSuppliesByProductIdSuccess(res.data))
-          // history.push('/supplies')
-          // dispatch(updateNotification('Suministro eliminado correctamente', 'success'))
         }else{
           dispatch(loadSuppliesByProductIdFailed(res, ProductId))
-          // dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
         }
   
       }catch(error){
         console.log('error:', error)
-        // dispatch(updateNotification('Hubo un error al eliminar el Suministro', 'danger'))
         dispatch(loadSuppliesByProductIdFailed(error, ProductId))
       }
     }

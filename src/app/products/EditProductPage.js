@@ -57,6 +57,14 @@ export default function EditProductPage() {
         setSupplies(data)
     }
 
+    const updateSupplies = async (data) => {
+        dispatch(ProductActions.updateSupplies(data))
+    }
+
+    const deleteSupplie = async (ProductSupplieId) => {
+        dispatch(ProductActions.destroySupplieById(ProductSupplieId))
+    }
+
     return (
         <Container fluid={true} className="my-3">
             <Row>
@@ -111,6 +119,8 @@ export default function EditProductPage() {
                                 product={currentProduct}
                                 save={saveSupplies}
                                 suppliesByProduct={currentSupplies}
+                                updateSupplies={updateSupplies}
+                                deleteSupplie={deleteSupplie}
                                 // saveChange={saveChange}
                             />
                                 : <Spinner />
