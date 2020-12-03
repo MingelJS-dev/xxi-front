@@ -38,6 +38,10 @@ export default function EditUserPage() {
         dispatch(UserActions.updateUserById(data))
     }
 
+    function destroy(id) {
+        dispatch(UserActions.destroyById(id))
+    }
+
 
     return (
         <Container fluid={true} className="my-3">
@@ -54,7 +58,19 @@ export default function EditUserPage() {
             <Row className="mb-2">
                 <Col className="col-12 p-0 mb-2 col-lg-6 pr-lg-2">
                     <Card className="shadow">
-                        <Card.Header className="text-white font-weight-bold bg-dark">Datos de usuario</Card.Header>
+                        <Card.Header className=" d-flex justify-content-between text-white font-weight-bold bg-dark">Datos de usuario
+                        {
+                                currentUser && currentUser.id ?
+                                    <div>
+                                        <button
+                                            onClick={() => destroy(currentUser.id)}
+                                            className="btn btn-danger">
+                                            Eliminar
+                            </button>
+                                    </div>
+                                    : null
+                            }
+                        </Card.Header>
                         <Card.Body>
                             {currentUser
                                 ?

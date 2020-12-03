@@ -65,6 +65,21 @@ export function createFailed(error){
   return { type: CREATE_FAILED, error }
 }
 
+export const DESTROY = '[Users] DESTROY';
+export function destroyUser(data){
+  return { type: UPDATE_ONE, data }
+}
+
+export const DESTROY_SUCCESS = '[Users] DESTROY_SUCCESS';
+export function destroySuccess(user){
+  return { type: DESTROY_SUCCESS, user }
+}
+
+export const DESTROY_FAILED = '[Users] DESTROY_FAILED';
+export function destroyFailed(error){
+  return { type: DESTROY_FAILED, error }
+}
+
 export const [ UPDATE_PAGINATION, updatePagination ] = createAction('[Users] UPDATE_PAGINATION', ['headers'])
 
 export function fetchUsers(filters = {}){
@@ -195,6 +210,40 @@ export function updateUserStatus(UserId, status){
       }
     }catch(error){
       dispatch(updateOneFailed(error))
+    }
+  }
+}
+
+export function destroyById(UserId){
+  return async function(dispatch, getState){
+    dispatch(destroyUser(UserId))
+
+    try{
+      const res = await axios.delete(window.config.API_URL + 'delete_user/?id=' + UserId,
+        // {
+        //   params: {
+        //     id: SupplieId
+        //   }
+        // },
+        {
+          headers: { token: getAuthHeaders(getState()) },
+          token: getAuthHeaders(getState())
+        }
+      );
+
+      if( res.status === 200 ){
+        dispatch(destroySuccess({UserId}))
+        history.push('/users')
+        dispatch(updateNotification('Usuario eliminado correctamente', 'success'))
+      }else{
+        dispatch(updateOneFailed(res, UserId))
+        dispatch(updateNotification('Hubo un error al eliminar el usuario', 'danger'))
+      }
+
+    }catch(error){
+      console.log('error:', error)
+      dispatch(updateNotification('Hubo un error al eliminar el usaurio', 'danger'))
+      dispatch(destroyFailed(error, UserId))
     }
   }
 }
