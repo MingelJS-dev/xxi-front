@@ -119,7 +119,7 @@ export default function Sidebar({ onChange }) {
                 <li className="nav-item">
                   <NavLink to="/tables" className="nav-link" onClick={() => onChange()}>
                     <FontAwesomeIcon icon={faChessBoard} />
-                    <span>Mesas (30%)</span>
+                    <span>Mesas (90%)</span>
                   </NavLink>
                 </li>
                 : ''

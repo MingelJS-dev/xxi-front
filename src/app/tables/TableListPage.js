@@ -16,6 +16,7 @@ import useWindowSize from "../shared/WindowSize.js";
 import TablesTable from './TablesTable.js';
 
 import * as TablesActions from '../../actions/tables.actions.js'
+import * as UserActions from '../../actions/users.actions.js'
 
 function SuppliesListPage() {
     const dispatch = useDispatch()
@@ -33,6 +34,7 @@ function SuppliesListPage() {
 
 
     useEffect(() => {
+        dispatch(UserActions.fetchUsers())
         dispatch(TablesActions.fetchTables())
     }, [dispatch, history])
 

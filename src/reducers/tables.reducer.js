@@ -9,7 +9,8 @@ const INITIAL_STATE = {
 
 export default function auth(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case TablesActions.LOAD_TABLES_FAILED:
+        case TablesActions.CREATE:
+        case TablesActions.LOAD_TABLES:
             return {
                 ...state,
                 isLoading: true
@@ -33,21 +34,54 @@ export default function auth(state = INITIAL_STATE, action) {
             }
 
 
-        // case TablesActions.UPDATE_ONE:
-        //     return {
-        //         ...state,
-        //         loadingById: {
-        //             ...state.loadingById,
-        //             [action.data.id]: true
-        //         }
-        //     }
+        case TablesActions.UPDATE_ONE:
+            return {
+                ...state,
+                loadingById: {
+                    ...state.loadingById,
+                    [action.data.id]: true
+                }
+            }
 
-        // case TablesActions.CREATE_SUCCESS:
-        // case TablesActions.CREATE_FAILED:
-        //     return {
-        //         ...state,
-        //         isLoading: false
-        //     }
+        case TablesActions.UPDATE_ONE_SUCCESS:
+            return {
+                ...state,
+                //isLoading: false,
+                entities: {
+                    ...state.entities,
+                    [action.table.id]: {
+                        ...state.entities[action.table.id],
+                        ...action.table
+                    }
+                },
+                loadingById: {
+                    ...state.loadingById,
+                    [action.table.id]: false
+                }
+            }
+
+        case TablesActions.CREATE_SUCCESS:
+            return {
+                ...state,
+                entities: {
+                    ...state.entities
+                },
+                isLoading: false
+            }
+        case TablesActions.CREATE_FAILED:
+            return {
+                ...state,
+                isLoading: false
+            }
+    
+        case TablesActions.DESTROY_SUCCESS: 
+         delete state.entities[action.table.TableId]
+        return {
+            ...state,
+            entities: {
+                ...state.entities
+            }
+        }
 
         default:
             return state;
@@ -60,9 +94,9 @@ export const getTableById = (state, TableId) => state.tables.entities[TableId]
 
 export const getIsLoading = state => state.tables.isLoading
 export const getIsLoadingById = (state, TableId) => {
-    if( TableId === undefined ){
-      return false
+    if (TableId === undefined) {
+        return false
     }
-  
+
     return state.tables.loadingById[TableId]
-  }
+}

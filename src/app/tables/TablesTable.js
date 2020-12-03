@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
@@ -12,11 +12,13 @@ import Button from 'react-bootstrap/Button';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import history from '../../history.js'
 
 import * as TableReducer from '../../reducers/tables.reducer.js'
+import * as UserReducer from '../../reducers/users.reducer.js'
+import * as TableActions from '../../actions/tables.actions'
 
 function StatusCheck({ item }) {
     const dispatch = useDispatch()
@@ -24,11 +26,17 @@ function StatusCheck({ item }) {
 
     function toggle() {
         const status = item.status ? 'No disponible' : 'Disponible'
-        // dispatch(UserActions.updateUserStatus(item.id, status))
+        dispatch(TableActions.updateTableById({
+            id: item.id,
+            status: !item.status,
+            number: item.number
+        }))
     }
 
     let label = item.status ? 'No disponible' : 'Disponible'
-
+    useEffect(() => {
+        // console.log(tables)
+    }, [dispatch])
     if (isLoading) {
         label = 'Actualizando...'
     }
@@ -48,10 +56,15 @@ function StatusCheck({ item }) {
 
 export default function SuppliesTable() {
     const tables = useSelector(TableReducer.getTables)
+    const users = useSelector(UserReducer.getUsers)
     const isLoading = useSelector(TableReducer.getIsLoading)
+    const isLoadingU = useSelector(UserReducer.getIsLoading)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        // console.log(tables)
+    }, [users])
 
-
-    if (isLoading) {
+    if (isLoading || isLoadingU) {
         return (
             <div className="container-lg py-4 p-0 text-center">
                 <Spinner />
@@ -63,6 +76,27 @@ export default function SuppliesTable() {
         return <div className="not-found-table-items">No se encontraron mesas</div>
     }
 
+    function updateTable(item, user_id) {
+        dispatch(TableActions.updateTableById({
+            id: item.id,
+            number: item.number,
+            user_id: user_id ? user_id : null,
+            status: user_id ? true : false
+        }))
+    }
+
+    function createTable() {
+        dispatch(TableActions.createTable({
+            number: tables.length + 1,
+            user_id: null,
+            status: false
+        }))
+    }
+
+    function deleteTable(id) {
+        dispatch(TableActions.destroyTableById(id))
+    }
+
 
     return (
         <Container fluid={true} className="my-3">
@@ -71,13 +105,33 @@ export default function SuppliesTable() {
                     tables.map(item => (
                         <Col key={item.id} className="p-0 m-3">
                             <Card className="shadow">
-                                <Card.Header className='card-title  card-hearder'>
+                                <Card.Header className='card-title  card-hearder  d-flex justify-content-between  align-items-center'>
                                     <span>Mesa {item.number}</span>
+                                    <button
+                                        className="btn btn-danger"
+                                        onClick={() => deleteTable(item.id)}>
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </button>
                                 </Card.Header>
                                 <Card.Body className="p-0 m-3">
                                     <StatusCheck item={item} />
                                     <FontAwesomeIcon icon={faUser} />
-                                    <span className="ml-2" >Ocupado por: Nadie </span>
+                                    <span className="ml-2" >Ocupado por:
+                                    <select
+                                            className={`form-control`}
+                                            onChange={(e => updateTable(item, e.target.value))}
+                                            defaultValue={item.user_id}
+                                        >
+                                            <option value="">Seleccione...</option>
+                                            {
+                                                users.map(x => (
+                                                    <option
+                                                        key={x.id + x.name}
+                                                        value={x.id}
+                                                    >{x.name}</option>
+                                                ))
+                                            }
+                                        </select> </span>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -86,10 +140,11 @@ export default function SuppliesTable() {
 
                 <Col className="p-0 m-3">
                     <Card className="shadow">
-                        <Card.Header className="card-title card-hearder d-flex justify-content-between align-items-center">
+                        <Card.Header className="card-title-create  d-flex justify-content-between align-items-center">
                             <span>Crear mesa</span>
                             <button
                                 className="btn btn-light btn-sm"
+                                onClick={() => createTable()}
                             >
                                 <FontAwesomeIcon icon={faPlus} />
                             </button>
