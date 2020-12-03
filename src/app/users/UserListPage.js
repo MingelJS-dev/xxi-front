@@ -59,13 +59,6 @@ function UsersListPage() {
           </HeaderActions>
         </Header>
       </Row>
-
-      {/* <Row>
-        <Col className="p-0">
-          {Pagination}
-        </Col>
-      </Row> */}
-
       <Row>
         <Col className="pt-2 pr-0 pb-0 pl-0">
           {

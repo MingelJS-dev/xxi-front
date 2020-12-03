@@ -6,6 +6,7 @@ import supplies from './supplies.reducer.js'
 import notification from './notification.reducer.js'
 import tables from "./tables.reducer.js"
 import products from "./product.reducer.js"
+import orders from "./orders.reducer.js"
 
 const reducers = combineReducers({
     auth,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     supplies,
     notification,
     tables,
-    products
+    products,
+    orders
   });
   
   export default reducers;

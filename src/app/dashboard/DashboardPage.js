@@ -5,19 +5,21 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 import SuppliesTable from '../supplies/SuppliesTable.js'
 import * as SuppliesActions from '../../actions/supplies.actions.js'
 
 import ProductsTable from '../products/ProductsTable.js'
 import * as ProductActions from '../../actions/products.actions.js'
-
+import * as FileActions from '../../actions/file.actions.js'
 import Spinner from '../shared/Spinner.js';
 import Header from '../shared/Header.js'
 
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
+
 
 
 
@@ -33,6 +35,10 @@ export default function DashboardPage() {
   // useEffect(() => {
 
   // }, [ dispatch])
+
+  const exportFile = async () => {
+    dispatch(FileActions.fetchFile())
+  }
 
   return (
     <Container fluid={true} className="my-3">
@@ -78,9 +84,13 @@ export default function DashboardPage() {
               <span>Reporte Card</span>
 
             </Card.Header>
-
-            <Card.Body className="p-0">
-
+                
+            <Card.Body className="d-flex justify-content-center p-3">
+           
+                <Button onClick={() => exportFile()}>
+                   Descargar reporte
+                </Button>
+              
             </Card.Body>
           </Card>
         </Col>

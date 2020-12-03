@@ -20,3 +20,10 @@ export const userView = (role) => {
     return isAdmin(role)
 }
 
+export const orderView = (role) => {
+    return isAdmin(role) || isKitchen(role)
+}
+
+export const report = (role) => {
+    return isAdmin(role) || isFinance(role)
+}

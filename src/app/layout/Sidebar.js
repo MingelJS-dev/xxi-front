@@ -111,7 +111,7 @@ export default function Sidebar({ onChange }) {
             <li className="nav-item">
               <NavLink to="/dashboard" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faTachometerAlt} />
-                <span>Dashboard (50%)</span>
+                <span>Dashboard</span>
               </NavLink>
             </li>
             {
@@ -129,7 +129,7 @@ export default function Sidebar({ onChange }) {
                 <li className="nav-item">
                   <NavLink to="/products" className="nav-link" onClick={() => onChange()}>
                     <FontAwesomeIcon icon={faUtensils} />
-                    <span>Productos (70%)</span>
+                    <span>Productos</span>
                   </NavLink>
                 </li>
                 :
@@ -159,19 +159,26 @@ export default function Sidebar({ onChange }) {
                 ''
             }
 
-            <li className="nav-item">
+            {
+              Permission.orderView(currentRole) ?
+                <li className="nav-item">
+                  <NavLink to="/orders" className="nav-link" onClick={() => onChange()}>
+                    <FontAwesomeIcon icon={faSpinner} />
+                    <span>Ordenes (En desarrollo)</span>
+                  </NavLink>
+                </li>
+                :
+                ''
+            }
+
+            {/* <li className="nav-item">
               <NavLink to="/dev" className="nav-link" onClick={() => onChange()}>
                 <FontAwesomeIcon icon={faSpinner} />
                 <span>Reservas (En desarrollo)</span>
               </NavLink>
-            </li>
+            </li> */}
 
-            <li className="nav-item">
-              <NavLink to="/dev1" className="nav-link" onClick={() => onChange()}>
-                <FontAwesomeIcon icon={faSpinner} />
-                <span>Ordenes (En desarrollo)</span>
-              </NavLink>
-            </li>
+
 
             <li className="separator py-2"></li>
 
