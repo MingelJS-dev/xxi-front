@@ -2,6 +2,7 @@ import axios from 'axios'
 import { getAuthHeaders, createAction, toQueryString } from '../utils.js'
 import { updateNotification } from './notifications.actions.js'
 import history from '../history.js'
+import { saveAs } from 'file-saver';
 
 export const EXPORT_FILE = '[Files] EXPORT_FILE';
 export function exportFile() {
@@ -27,9 +28,10 @@ export function fetchFile() {
         // url += '?' + toQueryString({ page: 1 })
   
         const res = await axios.get(url);
-        console.log(res)
+
         if (res.status === 200) {
-        //   dispatch(loadProductsSuccess(res.data.data))
+          saveAs(res.config.url, 'Reporte')
+          dispatch(exportFileSuccess(res.data))
         } else {
         //   dispatch(loadProductsFailed(res.statusText))
         }

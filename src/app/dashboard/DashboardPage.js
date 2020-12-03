@@ -87,7 +87,7 @@ export default function DashboardPage() {
                 
             <Card.Body className="d-flex justify-content-center p-3">
            
-                <Button onClick={() => exportFile()}>
+                <Button onClick={() => exportFile()} download>
                    Descargar reporte
                 </Button>
               
