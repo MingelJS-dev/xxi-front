@@ -267,7 +267,7 @@ export default function SuppliesProductForm({ product, save, updateSupplies, del
                                     </Card>
                                 </Col>
                             </Row>
-                        ) : <Spinner />
+                        ) : product && product.id ? <Spinner /> : ''
                     }
                 </Col>
             </Row>
