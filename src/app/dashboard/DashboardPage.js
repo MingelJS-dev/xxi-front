@@ -13,6 +13,10 @@ import * as SuppliesActions from '../../actions/supplies.actions.js'
 import ProductsTable from '../products/ProductsTable.js'
 import * as ProductActions from '../../actions/products.actions.js'
 import * as FileActions from '../../actions/file.actions.js'
+import * as FileReducer from '../../reducers/file.reducer.js'
+import * as Permission from '../shared/utils.js'
+import { CurrentRoleContext } from '../../App.js'
+
 import Spinner from '../shared/Spinner.js';
 import Header from '../shared/Header.js'
 
@@ -25,7 +29,8 @@ import { faMapMarker } from '@fortawesome/free-solid-svg-icons';
 
 export default function DashboardPage() {
   const dispatch = useDispatch();
-
+  const currentRole = useContext(CurrentRoleContext)
+  const isLoading = useSelector(FileReducer.getIsLoading)
 
   useEffect(() => {
     dispatch(SuppliesActions.fetchSupplies())
@@ -78,22 +83,32 @@ export default function DashboardPage() {
           </Row>
         </Col>
 
-        <Col sm={12} lg={7} className="p-0 pl-lg-2">
-          <Card className="shadow">
-            <Card.Header className='card-title card-hearder'>
-              <span>Reporte Card</span>
+        {
+          Permission.report(currentRole) ?
+            <Col sm={12} lg={7} className="p-0 pl-lg-2">
+              <Card className="shadow">
+                <Card.Header className='card-title card-hearder'>
+                  <span>Reporte Card</span>
 
-            </Card.Header>
-                
-            <Card.Body className="d-flex justify-content-center p-3">
-           
-                <Button onClick={() => exportFile()} download>
-                   Descargar reporte
-                </Button>
-              
-            </Card.Body>
-          </Card>
-        </Col>
+                </Card.Header>
+
+                <Card.Body className="d-flex justify-content-center p-3">
+
+                  <Button className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+                  onClick={() => exportFile()} download>
+                   
+                    {
+                    isLoading ?
+                      <div className='spinner-border' role='status'></div>
+                      : " Descargar reporte"
+                  }
+                  </Button >
+            
+                </Card.Body>
+              </Card>
+            </Col> : ''
+        }
+
       </Row>
     </Container>
   );

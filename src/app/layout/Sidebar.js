@@ -18,7 +18,8 @@ import {
   faSpinner,
   faList,
   faUtensils,
-  faChessBoard
+  faChessBoard,
+  faEdit
 } from '@fortawesome/free-solid-svg-icons';
 
 import './sidebar.css'
@@ -163,8 +164,8 @@ export default function Sidebar({ onChange }) {
               Permission.orderView(currentRole) ?
                 <li className="nav-item">
                   <NavLink to="/orders" className="nav-link" onClick={() => onChange()}>
-                    <FontAwesomeIcon icon={faSpinner} />
-                    <span>Ordenes (En desarrollo)</span>
+                    <FontAwesomeIcon icon={faEdit} />
+                    <span>Ordenes</span>
                   </NavLink>
                 </li>
                 :

@@ -4,7 +4,10 @@ const INITIAL_STATE = {
     entities: {},
     ids: [],
     isLoading: false,
-    loadingById: {}
+    loadingById: {},
+    idsDetail: [],
+    entitiesDetail: {}
+
 }
 
 export default function auth(state = INITIAL_STATE, action) {
@@ -32,6 +35,29 @@ export default function auth(state = INITIAL_STATE, action) {
                 isLoading: false
             }
 
+        case OrderActions.LOAD_DETAIL_ORDER:
+            return {
+                ...state,
+                isLoading: true
+            }
+
+        case OrderActions.LOAD_DETAIL_ORDERS_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                entitiesDetail: action.details.reduce((acc, item) => {
+                    acc[item.id] = item
+                    return acc
+                }, {}),
+                idsDetail: action.details.map(x => x.id)
+            }
+
+        case OrderActions.LOAD_DETAIL_ORDERS_FAILED:
+            return {
+                ...state,
+                isLoading: false
+            }
+
 
 
         default:
@@ -46,9 +72,12 @@ export const getOrderById = (state, OrderId) => state.orders.entities[OrderId]
 
 export const getIsLoading = state => state.orders.isLoading
 export const getIsLoadingById = (state, OrderId) => {
-    if( OrderId === undefined ){
-      return false
+    if (OrderId === undefined) {
+        return false
     }
-  
+
     return state.orders.loadingById[OrderId]
-  }
+}
+
+export const getOrderDetailsEntities = state => state.orders.entitiesDetail
+export const getOrderDetails = state => Object.values(state.orders.entitiesDetail)

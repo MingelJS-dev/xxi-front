@@ -31,6 +31,7 @@ import NewProductPage from "./app/products/NewProductPage.js";
 import EditProductPage from "./app/products/EditProductPage.js";
 
 import OrdersListPage from "./app/orders/OrderListPage.js"
+import DetailOrderPage from "./app/orders/DetailOrderPage.js"
 
 // import { fetchCurrentUser } from "./actions/users.actions.js";
 // import { getSettings } from "./reducers/auth.reducer.js"
@@ -128,6 +129,7 @@ function App() {
                         <Route path="/products/new" exact component={NewProductPage} />
                         <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
                         <Route path="/orders" exact component={OrdersListPage} />
+                        <Route path="/orders/detail/:OrderId" exact component={DetailOrderPage} />
                         <Route path="*">
                           <Redirect to="/" />
                         </Route>
@@ -150,6 +152,7 @@ function App() {
                         <Route path="/products" exact component={ProductListPage} />
                         <Route path="/products/new" exact component={NewProductPage} />
                         <Route path="/products/:ProductId/edit" exact component={EditProductPage} />
+                        <Route path="/orders/detail/:OrderId" exact component={DetailOrderPage} />
                         <Route path="*">
                           <Redirect to="/" />
                         </Route>
