@@ -47,15 +47,37 @@ export default function DashboardPage() {
 
   return (
     <Container fluid={true} className="my-3">
-      <Row>
+      <Row className="d-flex justify-content-center mb-5">
+        {
+          Permission.report(currentRole) ?
+            <Col sm={12} lg={6} className="p-0 pl-lg-2">
+              <Card className="shadow">
+                <Card.Header className='card-title card-hearder'>
+                  <span>Reporte Card</span>
 
+                </Card.Header>
+
+                <Card.Body className="d-flex justify-content-center p-3">
+
+                  <Button className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
+                    onClick={() => exportFile()} download>
+
+                    {
+                      isLoading ?
+                        <div className='spinner-border' role='status'></div>
+                        : " Descargar reporte"
+                    }
+                  </Button >
+
+                </Card.Body>
+              </Card>
+            </Col> : ''
+        }
       </Row>
+   
 
-      <Row>
-        <Col sm={12} lg={5}>
-
-          <Row className="mb-2">
-            <Col sm={12} className="p-0">
+          <Row className="mb-2 d-flex justify-content-between">
+            <Col sm={6} className="p-0">
               <Card className="shadow">
                 <Card.Header className='card-title  card-hearder'>
                   <span>Suministros</span>
@@ -66,10 +88,7 @@ export default function DashboardPage() {
               </Card>
 
             </Col>
-          </Row>
-
-          <Row className="mb-2">
-            <Col sm={12} className="p-0">
+            <Col sm={6} className="p-0">
               <Card className="shadow">
                 <Card.Header className='card-title card-hearder'>
                   <span>Productos</span>
@@ -78,38 +97,14 @@ export default function DashboardPage() {
                   <ProductsTable />
                 </Card.Body>
               </Card>
-
             </Col>
           </Row>
-        </Col>
+          <Row className="mb-2">
 
-        {
-          Permission.report(currentRole) ?
-            <Col sm={12} lg={7} className="p-0 pl-lg-2">
-              <Card className="shadow">
-                <Card.Header className='card-title card-hearder'>
-                  <span>Reporte Card</span>
 
-                </Card.Header>
 
-                <Card.Body className="d-flex justify-content-center p-3">
+          </Row>
 
-                  <Button className={`btn btn-primary ${isLoading ? 'loading' : ''}`}
-                  onClick={() => exportFile()} download>
-                   
-                    {
-                    isLoading ?
-                      <div className='spinner-border' role='status'></div>
-                      : " Descargar reporte"
-                  }
-                  </Button >
-            
-                </Card.Body>
-              </Card>
-            </Col> : ''
-        }
-
-      </Row>
     </Container>
   );
 }
