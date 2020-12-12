@@ -76,7 +76,7 @@ export default function DashboardPage() {
       </Row>
    
 
-          <Row className="mb-2 d-flex justify-content-between">
+          <Row className="d-flex justify-content-between">
             <Col sm={6} className="p-0">
               <Card className="shadow">
                 <Card.Header className='card-title  card-hearder'>
@@ -99,12 +99,6 @@ export default function DashboardPage() {
               </Card>
             </Col>
           </Row>
-          <Row className="mb-2">
-
-
-
-          </Row>
-
     </Container>
   );
 }

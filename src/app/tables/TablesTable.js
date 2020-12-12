@@ -87,7 +87,7 @@ export default function SuppliesTable() {
 
     function createTable() {
         dispatch(TableActions.createTable({
-            number: tables.length + 1,
+            number: tables.length + 2,
             user_id: null,
             status: false
         }))
