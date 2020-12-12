@@ -18,7 +18,7 @@ function OrdersListPage() {
   const dispatch = useDispatch()
   const history = useHistory()
   const winSize = useWindowSize()
-
+  const [filter, setFilter] = useState(null)
   //   const paginationInfo = useSelector(UserReducer.getPagination)
 
 
@@ -43,16 +43,33 @@ function OrdersListPage() {
             { label: "Listado de ordenes" }
           ]}
         >
-          {/* <HeaderActions>
-                <Link to="/users/new" className="btn btn-sm btn-create-user">Crear usuario</Link>
-            </HeaderActions> */}
+          <HeaderActions>
+            <div className="btn-group" role="group">
+               
+              <button type="button" className={`btn btn-sm ${filter === 1 ? 'btn-selected-user' : 'btn-create-user'}`}  
+                checked={true}
+                onClick={() => setFilter(1)}
+              >Creadas</button>
+              <button type="button" className={`btn btn-sm ${filter === 2 ? 'btn-selected-user' : 'btn-create-user'}`}  
+                onClick={() => setFilter(2)}
+              >En preparación</button>
+                <button type="button" className={`btn btn-sm ${filter === 3 ? 'btn-selected-user' : 'btn-create-user'}`}  
+                onClick={() => setFilter(3)}
+              >Finalizada</button>
+              <button type="button" className={`btn btn-sm ${filter === null ? 'btn-selected-user' : 'btn-create-user'}`}  
+                onClick={() => setFilter(null)}
+              >Todos</button>
+            </div>
+          </HeaderActions>
         </Header>
       </Row>
       <Row>
         <Col className="pt-2 pr-0 pb-0 pl-0">
           <Card>
             <Card.Body className="p-0 table-responsive">
-              <OrdersTable />
+              <OrdersTable
+                filter={filter}
+              />
             </Card.Body>
           </Card>
 

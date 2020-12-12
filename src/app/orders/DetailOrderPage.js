@@ -45,7 +45,7 @@ export default function DetailOrderPage() {
 
        return total
     }
-    console.log(details)
+
     return (
         <Container fluid={true} className="my-3">
             <Row>
@@ -102,15 +102,9 @@ export default function DetailOrderPage() {
                                                     </Card.Header>
                                                     <Card.Body className="d-flex justify-content-center p-0 m-3">
                                                         <div className="ml-2">
-                                                            <p className="mb-1">
                                                                 <h6 style={{color: 'black'}}>Cantidad: {item.quantity}</h6>
-                                                            </p>
-                                                            <p className="mb-1">
-                                                                <h6 style={{color: 'black'}} >Status: {item.status}</h6>
-                                                            </p>
-                                                            <p className="mb-1">
-                                                                <h6 style={{color: 'black'}} >Precio: {item.price}</h6>
-                                                            </p>
+                                                                <h6 style={{color: 'black'}} >Status: {item.status}</h6>                                                        
+                                                                <h6 style={{color: 'black'}} >Precio: {item.price}</h6>                                                          
                                                         </div>
                                                     </Card.Body>
                                                 </Card>

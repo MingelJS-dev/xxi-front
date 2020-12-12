@@ -58,6 +58,31 @@ export default function auth(state = INITIAL_STATE, action) {
                 isLoading: false
             }
 
+        case OrderActions.UPDATE_ONE:
+            return {
+                ...state,
+                loadingById: {
+                    ...state.loadingById,
+                    [action.data.id]: true
+                }
+            }
+
+        case OrderActions.UPDATE_ONE_SUCCESS:
+            return {
+                ...state,
+                //isLoading: false,
+                entities: {
+                    ...state.entities,
+                    [action.order.id]: {
+                        ...state.entities[action.order.id],
+                        ...action.order
+                    }
+                },
+                loadingById: {
+                    ...state.loadingById,
+                    [action.order.id]: false
+                }
+            }
 
 
         default:

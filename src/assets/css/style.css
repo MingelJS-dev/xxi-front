@@ -215,6 +215,16 @@ table>tbody>tr>td {
   color: #956eff;
 }
 
+.btn-selected-user {
+  border: 2px solid #956eff;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  background-color: #ffffff;
+  color: #956eff;
+}
+
+
+
 .btn-edit {
   border: 2px solid #ff1065;
   border-radius: 20px !important;

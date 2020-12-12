@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -23,13 +23,19 @@ import * as OrderReducer from '../../reducers/orders.reducer.js'
 
 import Spinner from '../shared/Spinner.js';
 
-export default function OrdersTable({ tableSize, mode = 'Table' }) {
+export default function OrdersTable({ tableSize, mode = 'Table', filter }) {
     const orders = useSelector(OrderReducer.getOrders)
     const isLoading = useSelector(OrderReducer.getIsLoading)
     const dispatch = useDispatch()
+    const [orderFilter, setOrderFilter] = useState([])
 
-    // useEffect(() => {
-    // }, [dispatch])
+    useEffect(() => {
+        if (filter) {
+            setOrderFilter(orders.filter(item => item.status_id === filter))
+        } else {
+            setOrderFilter(orders)
+        }
+    }, [dispatch, filter, orders && orders.length])
 
 
     if (isLoading && orders.length > 0 || orders.length === 0) {
@@ -57,11 +63,15 @@ export default function OrdersTable({ tableSize, mode = 'Table' }) {
         }
     }
 
+    const updateOrder = (item, StatusId) => {
+        dispatch(OrderActions.updateById(item, StatusId))
+    }
+
     return (
         <Container fluid={true} className="my-3">
             <Row xs={1} md={5} className="justify-content-center" >
                 {
-                    orders.map(item => (
+                    orderFilter.map(item => (
                         <Col key={item.id} className="p-0 m-3">
                             <Card className="shadow">
                                 <Card.Header className='card-title  card-hearder  d-flex justify-content-between  align-items-center'>
@@ -69,13 +79,40 @@ export default function OrdersTable({ tableSize, mode = 'Table' }) {
                                     <span>{getStatus(item.status_id)}</span>
                                 </Card.Header>
                                 <Card.Body className="d-flex justify-content-center p-0 m-3">
-                                    <NavLink to={`/orders/detail/${item.id}`} className="nav-link">
-                                        <button
-                                            className="btn btn-primary"
-                                        >
-                                            Ver detalle
-                                    </button>
-                                    </NavLink>
+
+                                    <Row>
+                                        <Col lg={12}>
+                                            <select
+                                                className={`form-control`}
+                                                onChange={(e => updateOrder(item, e.target.value))}
+                                                defaultValue={item.status_id}
+                                            >
+                                                {/* <option value="">Seleccione...</option> */}
+                                                <option
+                                                    value={1}
+                                                >Creada</option>
+                                                <option
+                                                    value={2}
+                                                >En preparación</option>
+                                                <option
+                                                    value={3}
+                                                >Finalizada</option>
+                                            </select>
+                                        </Col>
+                                        <Col className="d-flex justify-content-center">
+                                            <NavLink to={`/orders/detail/${item.id}`} className="nav-link">
+                                                <button
+                                                    className="btn btn-primary"
+                                                >
+                                                    Ver detalle
+                                            </button>
+                                            </NavLink>
+                                        </Col>
+                                    </Row>
+
+
+
+
 
                                 </Card.Body>
                             </Card>
